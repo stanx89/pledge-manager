@@ -342,3 +342,20 @@ INFO 2026-02-12 09:23:26,847 whatsapp_utils Generated invitation image for Frede
 INFO 2026-02-12 10:19:23,079 sms_utils SMS forwarded to 0768391662‬ for Boaz Mwamlimwa. Message ID: 174505, Status: PROCESSING
 INFO 2026-02-12 10:22:45,932 whatsapp_utils Generated invitation image for Familia: http://127.0.0.1:8000/static/invitations/invite_familia_QLY.png
 INFO 2026-02-12 10:22:48,260 whatsapp_utils WhatsApp invitation sent successfully to Familia (255754461655)
+INFO 2026-02-12 13:36:31,004 whatsapp_utils WhatsApp invitation sent successfully to Familia (255713241438)
+INFO 2026-02-12 13:39:12,683 whatsapp_utils Generated invitation image for Familia: http://127.0.0.1:8000/static/invitations/invite_familia_QLY.png
+ERROR 2026-02-12 13:39:12,683 whatsapp_utils Error sending WhatsApp to Familia: name 'result' is not defined
+INFO 2026-02-12 13:41:10,712 sms_utils SMS sent to 0713241438. Message ID: 174514, Status: PROCESSING
+INFO 2026-02-12 13:41:57,573 whatsapp_utils Generated invitation image for Familia: http://127.0.0.1:8000/static/invitations/invite_familia_QLY.png
+ERROR 2026-02-12 13:41:57,573 whatsapp_utils Error sending WhatsApp to Familia: name 'result' is not defined
+INFO 2026-02-12 13:43:50,046 whatsapp_utils Generated invitation image for Familia: http://127.0.0.1:8000/static/invitations/invite_familia_QLY.png
+INFO 2026-02-12 13:43:51,600 whatsapp_utils WhatsApp invitation sent successfully to Familia (255713241438)
+INFO 2026-02-12 13:44:19,979 whatsapp_utils WhatsApp invitation sent successfully to Familia (255713241438)
+INFO 2026-02-12 13:46:20,660 whatsapp_utils Starting WhatsApp invitation process for Familia (ID: 123ac348-aeec-404a-9e49-3ae98386a6bb)
+INFO 2026-02-12 13:46:20,661 whatsapp_utils Generating invitation image for Familia
+INFO 2026-02-12 13:46:20,661 whatsapp_utils Using image URL for Familia: http://127.0.0.1:8000/static/invitations/invite_familia_QLY.png
+INFO 2026-02-12 13:46:20,661 whatsapp_utils Sending WhatsApp to 255713241438 with message: Dear Familia, you are cordially invited to the wedding celebration!
+INFO 2026-02-12 13:46:20,661 whatsapp_utils Sending WhatsApp message to 255713241438
+INFO 2026-02-12 13:46:21,868 whatsapp_utils WhatsApp API response status: 200
+INFO 2026-02-12 13:46:21,868 whatsapp_utils WhatsApp message sent successfully to 255713241438. Message ID: wamid.HBgMMjU1NzEzMjQxNDM4FQIAERgSODZCRkMzMzhEQzhFQTQxM0Y1AA==
+INFO 2026-02-12 13:46:21,907 whatsapp_utils ✓ WhatsApp invitation completed successfully for Familia (255713241438). Message ID: wamid.HBgMMjU1NzEzMjQxNDM4FQIAERgSODZCRkMzMzhEQzhFQTQxM0Y1AA==

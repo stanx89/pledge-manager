@@ -42,8 +42,8 @@ def add_dear_name(img, invitee_name):
     text = f"Dear {invitee_name}"
 
     # Position (tuned for your card layout)
-    x = 250
-    y = 170
+    x = 240
+    y = 140
 
     # Wedding-style maroon color
     text_color = (95, 28, 28)
@@ -150,9 +150,8 @@ class WhatsAppService:
             # Save the image
             final_image.save(str(image_path), quality=95)
             
-            # Generate full URL for Django URLField validation
-            # For development, use localhost. In production, this should be your domain
-            base_url = "http://127.0.0.1:8000"  # Update this for production
+            # Generate full URL using configurable BASE_URL
+            base_url = getattr(settings, 'BASE_URL', 'http://127.0.0.1:8000')
             image_url = f"{base_url}{settings.STATIC_URL}invitations/{image_filename}"
             
             # Update the pledge record with the URL
@@ -211,61 +210,97 @@ class WhatsAppService:
             }
         }
         
+        logger.info(f"Sending WhatsApp message to {phone_number}")
+        logger.debug(f"WhatsApp API payload: {json.dumps(payload, indent=2)}")
+        
         response = requests.post(self.base_url, headers=headers, json=payload)
+        
+        # Log the raw response
+        logger.info(f"WhatsApp API response status: {response.status_code}")
+        logger.debug(f"WhatsApp API raw response: {response.text}")
         
         if response.status_code == 200:
             result = response.json()
+            message_id = result.get('messages', [{}])[0].get('id', '')
+            
+            # Log successful response details
+            logger.info(f"WhatsApp message sent successfully to {phone_number}. Message ID: {message_id}")
+            logger.debug(f"WhatsApp success response: {json.dumps(result, indent=2)}")
+            
             return {
                 'success': True,
-                'message_id': result.get('messages', [{}])[0].get('id', ''),
+                'message_id': message_id,
                 'response': result
             }
         else:
+            # Log error response details
+            error_msg = f"HTTP {response.status_code}: {response.text}"
+            logger.error(f"WhatsApp API error for {phone_number}: {error_msg}")
+            
+            try:
+                error_details = response.json()
+                logger.error(f"WhatsApp error details: {json.dumps(error_details, indent=2)}")
+            except:
+                logger.error(f"Could not parse error response as JSON: {response.text}")
+                
             return {
                 'success': False,
-                'error': f"HTTP {response.status_code}: {response.text}",
+                'error': error_msg,
                 'response': response.text
             }
             
     def send_invitation_whatsapp(self, pledge_record):
         """Send WhatsApp invitation to a pledge record"""
+        logger.info(f"Starting WhatsApp invitation process for {pledge_record.name} (ID: {pledge_record.id})")
+        
         try:
             # Format phone number for WhatsApp
             whatsapp_phone = self.format_phone_for_whatsapp(pledge_record.mobile_number)
             if not whatsapp_phone:
+                error_msg = f"Invalid phone number format: {pledge_record.mobile_number}"
+                logger.error(f"Phone format error for {pledge_record.name}: {error_msg}")
                 return {
                     'success': False,
-                    'error': f"Invalid phone number format: {pledge_record.mobile_number}"
+                    'error': error_msg
                 }
                 
             # Generate or get existing image URL
+            logger.info(f"Generating invitation image for {pledge_record.name}")
             image_url = self.generate_invitation_image(pledge_record)
             if not image_url:
+                error_msg = "Failed to generate invitation image"
+                logger.error(f"Image generation failed for {pledge_record.name}: {error_msg}")
                 return {
                     'success': False,
-                    'error': "Failed to generate invitation image"
+                    'error': error_msg
                 }
                 
             # Image URL is now already a full URL from generate_invitation_image
             full_image_url = image_url
+            logger.info(f"Using image URL for {pledge_record.name}: {full_image_url}")
                 
             # Create personalized message
             message_text = f"Dear {pledge_record.name}, you are cordially invited to the wedding celebration!"
+            logger.info(f"Sending WhatsApp to {whatsapp_phone} with message: {message_text}")
             
             # Send WhatsApp message
             result = self.send_whatsapp_template(whatsapp_phone, full_image_url, message_text)
             
+            # Log the final result
             if result['success']:
                 # Update the record to mark WhatsApp as sent
                 pledge_record.whatsapp_sent = True
                 pledge_record.save()
                 
-                logger.info(f"WhatsApp invitation sent successfully to {pledge_record.name} ({whatsapp_phone})")
+                logger.info(f"✓ WhatsApp invitation completed successfully for {pledge_record.name} ({whatsapp_phone}). Message ID: {result.get('message_id', 'N/A')}")
+            else:
+                logger.error(f"✗ WhatsApp invitation failed for {pledge_record.name} ({whatsapp_phone}): {result.get('error', 'Unknown error')}")
                 
             return result
             
         except Exception as e:
-            logger.error(f"Error sending WhatsApp to {pledge_record.name}: {str(e)}")
+            error_msg = f"Unexpected error sending WhatsApp to {pledge_record.name}: {str(e)}"
+            logger.error(error_msg, exc_info=True)
             return {
                 'success': False,
                 'error': str(e)

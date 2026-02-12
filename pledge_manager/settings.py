@@ -140,6 +140,9 @@ WHATSAPP_API_TOKEN = "EAAQiTIkQL2MBQgYXGjMZCJrg78DWP5vhGb6f3ST0n6cgP67muKVZBYsUi
 WHATSAPP_PHONE_NUMBER_ID = "834398519761412"  # Replace with your WhatsApp Business phone number ID
 WHATSAPP_TEMPLATE_NAME = "kadi_mualiko"  # Template name
 
+# Base URL Configuration
+BASE_URL = "http://127.0.0.1:8000"  # Change to your production domain (e.g., "https://yourdomain.com")
+
 # Login settings
 LOGIN_URL = '/login/'
 LOGIN_REDIRECT_URL = '/'
