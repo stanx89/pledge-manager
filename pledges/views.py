@@ -6,6 +6,7 @@ import pandas as pd
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db import transaction
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
@@ -44,6 +45,7 @@ class PledgeListView(LoginRequiredMixin, ListView):
         return context
 
 
+@login_required
 def upload_file(request):
     """Handle file upload for pledge records"""
     if request.method == 'POST':
@@ -184,6 +186,7 @@ def process_upload_data(df, filename):
     }
 
 
+@login_required
 def edit_record(request, record_id):
     """Edit a pledge record"""
     record = get_object_or_404(PledgeRecord, id=record_id)
@@ -212,6 +215,7 @@ def edit_record(request, record_id):
     return render(request, 'pledges/edit_record.html', context)
 
 
+@login_required
 @require_POST
 def delete_record(request, record_id):
     """Delete a pledge record"""
@@ -222,12 +226,14 @@ def delete_record(request, record_id):
     return redirect('pledge_list')
 
 
+@login_required
 def upload_logs(request):
     """Display upload logs"""
     logs = UploadLog.objects.all().order_by('-uploaded_at')
     return render(request, 'pledges/upload_logs.html', {'logs': logs})
 
 
+@login_required
 def view_pledge_detail(request, record_id):
     """
     View detailed information about a pledge record including SMS history
@@ -244,6 +250,7 @@ def view_pledge_detail(request, record_id):
     return render(request, 'pledges/pledge_detail.html', context)
 
 
+@login_required
 @require_POST
 def send_sms(request, record_id):
     """Send SMS to a specific pledge record"""
@@ -267,6 +274,7 @@ def send_sms(request, record_id):
     return redirect('pledge_list')
 
 
+@login_required
 @require_POST
 def send_bulk_sms(request):
     """Send SMS to multiple records"""
@@ -307,6 +315,7 @@ def send_bulk_sms(request):
     return redirect('pledge_list')
 
 
+@login_required
 def sms_form(request):
     """Display SMS sending form"""
     if request.method == 'POST':
@@ -370,6 +379,7 @@ def forward_sms(request, record_id):
 
 
 @require_POST
+@login_required
 def forward_sms_modal(request, record_id):
     """Simple modal-based SMS forwarding that only takes phone number and sends default message"""
     record = get_object_or_404(PledgeRecord, id=record_id)
@@ -429,7 +439,7 @@ def send_background_sms_worker(unsent_records):
     
     print(f"Background SMS batch completed: {successful} successful, {failed} failed")
 
-
+@login_required
 @require_POST
 def send_background_sms_all(request):
     """Send SMS to all records that haven't received normal messages yet - in background"""
@@ -463,6 +473,7 @@ def send_background_sms_all(request):
 
 
 # WhatsApp Functions
+@login_required
 @require_POST
 def send_whatsapp(request, record_id):
     """Send WhatsApp invitation to a specific pledge record"""
@@ -483,6 +494,7 @@ def send_whatsapp(request, record_id):
     return redirect('pledge_list')
 
 
+@login_required
 @require_POST
 def send_bulk_whatsapp(request):
     """Send WhatsApp invitations to multiple records"""
@@ -514,6 +526,8 @@ def send_bulk_whatsapp(request):
     return redirect('pledge_list')
 
 
+@login_required
+@login_required
 @require_POST 
 def send_background_whatsapp_all(request):
     """Send WhatsApp invitations to all unsent records in the background"""

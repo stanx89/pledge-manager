@@ -140,6 +140,11 @@ WHATSAPP_API_TOKEN = "EAAQiTIkQL2MBQgYXGjMZCJrg78DWP5vhGb6f3ST0n6cgP67muKVZBYsUi
 WHATSAPP_PHONE_NUMBER_ID = "834398519761412"  # Replace with your WhatsApp Business phone number ID
 WHATSAPP_TEMPLATE_NAME = "kadi_mualiko"  # Template name
 
+# Login settings
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/login/'
+
 SMS_DEFAULT_MESSAGE = """Habari {name},
 
 Unakaribishwa kwenye harusi ya Stanslaus Kayombo & Felista Malibate

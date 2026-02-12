@@ -1,18 +1,49 @@
 # Pledge Manager Django Application
 
-A Django web application for managing pledge records with file upload functionality.
+A Django web application for managing pledge records with file upload functionality and authentication.
 
 ## Features
 
+- **Authentication**: Login protection for all functionality (username: `mubote`, password: `kayombo`)
 - **File Upload**: Upload CSV or Excel files with pledge data
 - **Data Management**: View, edit, and delete pledge records
 - **Primary Key**: Mobile number as primary key (duplicates are updated)
 - **Status Tracking**: Track normal message sent and WhatsApp sent status (default: false)
 - **Card Capacity**: Auto-calculated capacity based on paid amount (0, 1, or 2)
 - **SMS Integration**: Send SMS messages using Notify Africa API
+- **WhatsApp Integration**: Send WhatsApp invitations with personalized images
 - **Upload Logs**: Keep track of upload statistics and errors
 - **Admin Interface**: Full Django admin interface for advanced management
-- **Responsive UI**: Bootstrap-based responsive user interface
+- **Responsive UI**: Tailwind CSS responsive user interface
+
+## Quick Setup
+
+1. **Install dependencies**:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+2. **Run migrations** (this automatically creates the login user):
+   ```bash
+   python manage.py migrate
+   ```
+
+3. **Start the server**:
+   ```bash
+   python manage.py runserver
+   ```
+
+4. **Access the application**:
+   - Navigate to http://127.0.0.1:8000
+   - Login with: `mubote` / `kayombo`
+
+## Authentication
+
+The application is protected by login authentication:
+- **Username**: `mubote`
+- **Password**: `kayombo`  
+- User is automatically created when running migrations
+- All routes except static files require authentication
 
 ## Data Structure
 

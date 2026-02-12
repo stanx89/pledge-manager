@@ -39,6 +39,12 @@
                     <a href="{% url 'upload_file' %}" class="flex items-center px-3 py-2 rounded-md text-sm font-medium text-white hover:bg-blue-700 transition-colors">
                         <i class="fas fa-upload mr-1"></i> Upload
                     </a>
+                    <div class="relative">
+                        <a href="{% url 'logout' %}" class="flex items-center px-3 py-2 rounded-md text-sm font-medium text-white hover:bg-red-700 transition-colors">
+                            <i class="fas fa-sign-out-alt mr-1"></i> Logout ({{ user.username }})
+                        </a>
+                    </div>
+                    </a>
                     <a href="/admin/" class="flex items-center px-3 py-2 rounded-md text-sm font-medium text-white hover:bg-blue-700 transition-colors">
                         <i class="fas fa-cog mr-1"></i> Admin
                     </a>
