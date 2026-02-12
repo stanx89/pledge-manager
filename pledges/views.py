@@ -256,6 +256,11 @@ def send_sms(request, record_id):
     """Send SMS to a specific pledge record"""
     record = get_object_or_404(PledgeRecord, id=record_id)
     
+    # Check if paid amount is too low
+    if record.paid <= 50000:
+        messages.error(request, f"Cannot send SMS to {record.name}: Paid amount ({record.paid:,.0f}) must be more than 50,000")
+        return redirect('pledge_list')
+    
     try:
         sms_service = SMSService()
         custom_message = request.POST.get('message')
@@ -285,11 +290,22 @@ def send_bulk_sms(request):
         return redirect('pledge_list')
     
     try:
-        records = PledgeRecord.objects.filter(id__in=record_ids)
+        # Filter records with paid amount > 50000
+        all_records = PledgeRecord.objects.filter(id__in=record_ids)
+        eligible_records = all_records.filter(paid__gt=50000)
+        excluded_count = all_records.count() - eligible_records.count()
+        
+        if excluded_count > 0:
+            messages.warning(request, f"Excluded {excluded_count} record(s) with paid amount ≤ 50,000")
+        
+        if not eligible_records.exists():
+            messages.error(request, "No eligible records found (all have paid amount ≤ 50,000)")
+            return redirect('pledge_list')
+        
         custom_message = request.POST.get('message')
         
         sms_service = SMSService()
-        results = sms_service.send_bulk_sms(records, custom_message)
+        results = sms_service.send_bulk_sms(eligible_records, custom_message)
         
         successful = sum(1 for result in results if result['success'])
         failed = len(results) - successful
@@ -479,6 +495,11 @@ def send_whatsapp(request, record_id):
     """Send WhatsApp invitation to a specific pledge record"""
     record = get_object_or_404(PledgeRecord, id=record_id)
     
+    # Check if paid amount is too low
+    if record.paid <= 50000:
+        messages.error(request, f"Cannot send WhatsApp to {record.name}: Paid amount ({record.paid:,.0f}) must be more than 50,000")
+        return redirect('pledge_list')
+    
     try:
         whatsapp_service = WhatsAppService()
         result = whatsapp_service.send_invitation_whatsapp(record)
@@ -497,7 +518,7 @@ def send_whatsapp(request, record_id):
 @login_required
 @require_POST
 def send_bulk_whatsapp(request):
-    """Send WhatsApp invitations to multiple records"""
+    """Send WhatsApp invitations to multiple records (max 100)"""
     record_ids = request.POST.getlist('selected_records')
     
     if not record_ids:
@@ -505,12 +526,28 @@ def send_bulk_whatsapp(request):
         return redirect('pledge_list')
     
     try:
-        records = PledgeRecord.objects.filter(id__in=record_ids)
+        # Filter records with paid amount > 50000
+        all_records = PledgeRecord.objects.filter(id__in=record_ids)
+        eligible_records = all_records.filter(paid__gt=50000)
+        excluded_count = all_records.count() - eligible_records.count()
+        
+        if excluded_count > 0:
+            messages.warning(request, f"Excluded {excluded_count} record(s) with paid amount ≤ 50,000")
+        
+        if not eligible_records.exists():
+            messages.error(request, "No eligible records found (all have paid amount ≤ 50,000)")
+            return redirect('pledge_list')
+        
+        # Limit to 100 records
+        if eligible_records.count() > 100:
+            eligible_records = eligible_records[:100]
+            messages.warning(request, f"Limited to first 100 eligible records (out of {all_records.filter(paid__gt=50000).count()})")
+        
         whatsapp_service = WhatsAppService()
         successful = 0
         failed = 0
         
-        for record in records:
+        for record in eligible_records:
             if not record.whatsapp_sent:
                 result = whatsapp_service.send_invitation_whatsapp(record)
                 if result['success']:
@@ -530,15 +567,24 @@ def send_bulk_whatsapp(request):
 @login_required
 @require_POST 
 def send_background_whatsapp_all(request):
-    """Send WhatsApp invitations to all unsent records in the background"""
+    """Send WhatsApp invitations to all unsent eligible records in the background (max 100)"""
     try:
-        # Get all records that haven't received WhatsApp yet
-        unsent_records = PledgeRecord.objects.filter(whatsapp_sent=False)
+        # Get all records that haven't received WhatsApp yet and have paid > 50000
+        unsent_records = PledgeRecord.objects.filter(
+            whatsapp_sent=False, 
+            paid__gt=50000
+        )
         total_count = unsent_records.count()
         
         if total_count == 0:
-            messages.info(request, "No unsent WhatsApp invitations found. All records have already received WhatsApp.")
+            messages.info(request, "No eligible unsent WhatsApp invitations found. All eligible records (paid > 50,000) have already received WhatsApp.")
             return redirect('pledge_list')
+        
+        # Limit to 100 records
+        if total_count > 100:
+            unsent_records = unsent_records[:100]
+            messages.warning(request, f"Limited to first 100 eligible records (out of {total_count})")
+            total_count = 100
         
         # Start background thread to send WhatsApp
         thread = threading.Thread(
@@ -550,7 +596,7 @@ def send_background_whatsapp_all(request):
         
         messages.success(
             request, 
-            f"Started sending WhatsApp invitations to {total_count} records in the background. "
+            f"Started sending WhatsApp invitations to {total_count} eligible records in the background. "
             f"This will take some time to complete."
         )
         
