@@ -22,8 +22,9 @@ def safe_filename(s: str) -> str:
 
 def load_font(paths, size):
     for p in paths:
+        print("Checking font path:", p)
         if p and os.path.exists(p):
-            print("Using font:", p)
+            print("Using font:", repr(p))
             return ImageFont.truetype(p, size=size)
     return ImageFont.load_default()
 
@@ -32,29 +33,38 @@ def add_dear_name(img, invitee_name):
     """Draw 'Dear Name' on the image"""
     draw = ImageDraw.Draw(img)
 
-    # Try to load elegant font
+    # Try to load elegant font from project fonts directory
     font_paths = [
-        "/Users/stan/Library/Fonts/DejaVu Serif Italic.ttf",
+        str(Path(settings.BASE_DIR) / 'static' / 'fonts' / 'GreatVibes-Regular.ttf'),
     ]
 
-    font = load_font(font_paths, 30)
+    font = load_font(font_paths, 65)
 
-    text = f"Dear {invitee_name}"
+    text = f"Habari"
 
     # Position (tuned for your card layout)
-    x = 240
-    y = 140
+    x = 500
+    y = 160
 
     # Wedding-style maroon color
-    text_color = (95, 28, 28)
+    text_color = (120, 80, 40)
 
     # Draw directly (NO background)
     draw.text((x, y), text, font=font, fill=text_color)
 
+    name = f"{invitee_name}"
+    text_color = (120, 80, 40)
+
+    # Position (tuned for your card layout)
+    x = 500
+    y = 220
+
+    draw.text((x, y), name, font=font, fill=text_color)
+
     return img
 
 
-def add_qr(img, qr_data):
+def add_qr(img, qr_data, cardType):
     """Add QR code to bottom center of image"""
     w, h = img.size
 
@@ -79,7 +89,25 @@ def add_qr(img, qr_data):
     x = (w - qr_size) // 2
     y = h - qr_size - int(h * 0.06)
 
-    img.paste(qr_img, (x, y))
+    img.paste(qr_img, (x+70, y))
+
+    font_paths = [
+        str(Path(settings.BASE_DIR) / 'static' / 'fonts' / 'Roboto-Bold.ttf'),
+    ]
+
+    font = load_font(font_paths, 30)
+
+    text = f"{cardType}"
+
+    draw = ImageDraw.Draw(img)
+
+    y = y+190
+    x = x+70
+
+    text_color = (120, 80, 40)
+
+    #Card type
+    draw.text((x, y), text.upper(), font=font, fill=text_color)
 
     return img
 
@@ -144,8 +172,9 @@ class WhatsAppService:
             image_with_name = add_dear_name(base_image, pledge_record.name)
             
             # Add QR code with card information
-            qr_data = f"Card: {pledge_record.card_code} | Capacity: {pledge_record.card_capacity}"
-            final_image = add_qr(image_with_name, qr_data)
+            capacity_text = "double" if pledge_record.card_capacity == 2 else "single"
+            qr_data = f"Card: {pledge_record.card_code} | Capacity: {pledge_record.card_capacity} {capacity_text}"
+            final_image = add_qr(image_with_name, qr_data, capacity_text)
             
             # Save the image
             final_image.save(str(image_path), quality=95)
@@ -280,7 +309,7 @@ class WhatsAppService:
             logger.info(f"Using image URL for {pledge_record.name}: {full_image_url}")
                 
             # Create personalized message
-            message_text = f"Dear {pledge_record.name}, you are cordially invited to the wedding celebration!"
+            message_text = f"Habari {pledge_record.name}, unakaribishwa rasmi kwenye sherehe ya harusi.!"
             logger.info(f"Sending WhatsApp to {whatsapp_phone} with message: {message_text}")
             
             # Send WhatsApp message

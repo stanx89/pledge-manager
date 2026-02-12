@@ -359,3 +359,539 @@ INFO 2026-02-12 13:46:20,661 whatsapp_utils Sending WhatsApp message to 25571324
 INFO 2026-02-12 13:46:21,868 whatsapp_utils WhatsApp API response status: 200
 INFO 2026-02-12 13:46:21,868 whatsapp_utils WhatsApp message sent successfully to 255713241438. Message ID: wamid.HBgMMjU1NzEzMjQxNDM4FQIAERgSODZCRkMzMzhEQzhFQTQxM0Y1AA==
 INFO 2026-02-12 13:46:21,907 whatsapp_utils ✓ WhatsApp invitation completed successfully for Familia (255713241438). Message ID: wamid.HBgMMjU1NzEzMjQxNDM4FQIAERgSODZCRkMzMzhEQzhFQTQxM0Y1AA==
+INFO 2026-02-12 18:24:23,531 whatsapp_utils Starting WhatsApp invitation process for Familia (ID: 123ac348-aeec-404a-9e49-3ae98386a6bb)
+INFO 2026-02-12 18:24:23,531 whatsapp_utils Generating invitation image for Familia
+INFO 2026-02-12 18:24:23,691 whatsapp_utils Generated invitation image for Familia: http://127.0.0.1:8000/static/invitations/invite_familia_QLY.png
+INFO 2026-02-12 18:24:23,691 whatsapp_utils Using image URL for Familia: http://127.0.0.1:8000/static/invitations/invite_familia_QLY.png
+INFO 2026-02-12 18:24:23,691 whatsapp_utils Sending WhatsApp to 255713241438 with message: Dear Familia, you are cordially invited to the wedding celebration!
+ERROR 2026-02-12 18:24:23,691 whatsapp_utils Unexpected error sending WhatsApp to Familia: name 'result' is not defined
+Traceback (most recent call last):
+  File "/Users/stan/harusi/pledges/whatsapp_utils.py", line 291, in send_invitation_whatsapp
+    if result['success']:
+NameError: name 'result' is not defined
+INFO 2026-02-12 18:34:07,220 whatsapp_utils Starting WhatsApp invitation process for Familia (ID: 123ac348-aeec-404a-9e49-3ae98386a6bb)
+INFO 2026-02-12 18:34:07,221 whatsapp_utils Generating invitation image for Familia
+ERROR 2026-02-12 18:34:07,284 whatsapp_utils Error generating invitation image for Familia: name 'text_color' is not defined
+ERROR 2026-02-12 18:34:07,284 whatsapp_utils Image generation failed for Familia: Failed to generate invitation image
+INFO 2026-02-12 18:34:46,171 whatsapp_utils Starting WhatsApp invitation process for Familia (ID: 123ac348-aeec-404a-9e49-3ae98386a6bb)
+INFO 2026-02-12 18:34:46,172 whatsapp_utils Generating invitation image for Familia
+ERROR 2026-02-12 18:34:46,230 whatsapp_utils Error generating invitation image for Familia: name 'text_color' is not defined
+ERROR 2026-02-12 18:34:46,230 whatsapp_utils Image generation failed for Familia: Failed to generate invitation image
+INFO 2026-02-12 18:36:19,140 whatsapp_utils Starting WhatsApp invitation process for Familia ya Aoknai (ID: 2eb5d9cb-3a3c-4f0f-bb64-4fceacc413bf)
+INFO 2026-02-12 18:36:19,141 whatsapp_utils Generating invitation image for Familia ya Aoknai
+INFO 2026-02-12 18:36:19,304 whatsapp_utils Generated invitation image for Familia ya Aoknai: http://127.0.0.1:8000/static/invitations/invite_familia_ya_aoknai_BVR.png
+INFO 2026-02-12 18:36:19,304 whatsapp_utils Using image URL for Familia ya Aoknai: http://127.0.0.1:8000/static/invitations/invite_familia_ya_aoknai_BVR.png
+INFO 2026-02-12 18:36:19,304 whatsapp_utils Sending WhatsApp to 255719340831 with message: Dear Familia ya Aoknai, you are cordially invited to the wedding celebration!
+ERROR 2026-02-12 18:36:19,304 whatsapp_utils Unexpected error sending WhatsApp to Familia ya Aoknai: name 'result' is not defined
+Traceback (most recent call last):
+  File "/Users/stan/harusi/pledges/whatsapp_utils.py", line 309, in send_invitation_whatsapp
+    if result['success']:
+NameError: name 'result' is not defined
+INFO 2026-02-12 18:37:59,050 whatsapp_utils Starting WhatsApp invitation process for Familia (ID: 123ac348-aeec-404a-9e49-3ae98386a6bb)
+INFO 2026-02-12 18:37:59,051 whatsapp_utils Generating invitation image for Familia
+INFO 2026-02-12 18:37:59,182 whatsapp_utils Generated invitation image for Familia: http://127.0.0.1:8000/static/invitations/invite_familia_QLY.png
+INFO 2026-02-12 18:37:59,182 whatsapp_utils Using image URL for Familia: http://127.0.0.1:8000/static/invitations/invite_familia_QLY.png
+INFO 2026-02-12 18:37:59,182 whatsapp_utils Sending WhatsApp to 255713241438 with message: Dear Familia, you are cordially invited to the wedding celebration!
+ERROR 2026-02-12 18:37:59,182 whatsapp_utils Unexpected error sending WhatsApp to Familia: name 'result' is not defined
+Traceback (most recent call last):
+  File "/Users/stan/harusi/pledges/whatsapp_utils.py", line 309, in send_invitation_whatsapp
+    if result['success']:
+NameError: name 'result' is not defined
+INFO 2026-02-12 18:39:02,553 whatsapp_utils Starting WhatsApp invitation process for Familia (ID: 123ac348-aeec-404a-9e49-3ae98386a6bb)
+INFO 2026-02-12 18:39:02,554 whatsapp_utils Generating invitation image for Familia
+INFO 2026-02-12 18:39:02,725 whatsapp_utils Generated invitation image for Familia: http://127.0.0.1:8000/static/invitations/invite_familia_QLY.png
+INFO 2026-02-12 18:39:02,725 whatsapp_utils Using image URL for Familia: http://127.0.0.1:8000/static/invitations/invite_familia_QLY.png
+INFO 2026-02-12 18:39:02,725 whatsapp_utils Sending WhatsApp to 255713241438 with message: Dear Familia, you are cordially invited to the wedding celebration!
+ERROR 2026-02-12 18:39:02,725 whatsapp_utils Unexpected error sending WhatsApp to Familia: name 'result' is not defined
+Traceback (most recent call last):
+  File "/Users/stan/harusi/pledges/whatsapp_utils.py", line 309, in send_invitation_whatsapp
+    if result['success']:
+NameError: name 'result' is not defined
+INFO 2026-02-12 18:39:51,750 whatsapp_utils Starting WhatsApp invitation process for Familia (ID: 123ac348-aeec-404a-9e49-3ae98386a6bb)
+INFO 2026-02-12 18:39:51,750 whatsapp_utils Generating invitation image for Familia
+INFO 2026-02-12 18:39:51,750 whatsapp_utils Using image URL for Familia:  
+INFO 2026-02-12 18:39:51,751 whatsapp_utils Sending WhatsApp to 255713241438 with message: Dear Familia, you are cordially invited to the wedding celebration!
+ERROR 2026-02-12 18:39:51,751 whatsapp_utils Unexpected error sending WhatsApp to Familia: name 'result' is not defined
+Traceback (most recent call last):
+  File "/Users/stan/harusi/pledges/whatsapp_utils.py", line 309, in send_invitation_whatsapp
+    if result['success']:
+NameError: name 'result' is not defined
+INFO 2026-02-12 18:40:32,939 whatsapp_utils Starting WhatsApp invitation process for Familia (ID: 123ac348-aeec-404a-9e49-3ae98386a6bb)
+INFO 2026-02-12 18:40:32,940 whatsapp_utils Generating invitation image for Familia
+INFO 2026-02-12 18:40:32,940 whatsapp_utils Using image URL for Familia:  
+INFO 2026-02-12 18:40:32,940 whatsapp_utils Sending WhatsApp to 255713241438 with message: Dear Familia, you are cordially invited to the wedding celebration!
+ERROR 2026-02-12 18:40:32,940 whatsapp_utils Unexpected error sending WhatsApp to Familia: name 'result' is not defined
+Traceback (most recent call last):
+  File "/Users/stan/harusi/pledges/whatsapp_utils.py", line 309, in send_invitation_whatsapp
+    if result['success']:
+NameError: name 'result' is not defined
+INFO 2026-02-12 18:41:43,834 whatsapp_utils Starting WhatsApp invitation process for Familia (ID: 123ac348-aeec-404a-9e49-3ae98386a6bb)
+INFO 2026-02-12 18:41:43,835 whatsapp_utils Generating invitation image for Familia
+INFO 2026-02-12 18:41:43,835 whatsapp_utils Using image URL for Familia:  
+INFO 2026-02-12 18:41:43,835 whatsapp_utils Sending WhatsApp to 255713241438 with message: Dear Familia, you are cordially invited to the wedding celebration!
+INFO 2026-02-12 18:41:43,835 whatsapp_utils Sending WhatsApp message to 255713241438
+INFO 2026-02-12 18:41:44,890 whatsapp_utils WhatsApp API response status: 400
+ERROR 2026-02-12 18:41:44,890 whatsapp_utils WhatsApp API error for 255713241438: HTTP 400: {"error":{"message":"(#100) Param template['components'][0]['parameters'][0]['image']['link'] is not a valid URI.","type":"OAuthException","code":100,"fbtrace_id":"A-wJn41YxbR7JC6CI424nnf"}}
+ERROR 2026-02-12 18:41:44,891 whatsapp_utils WhatsApp error details: {
+  "error": {
+    "message": "(#100) Param template['components'][0]['parameters'][0]['image']['link'] is not a valid URI.",
+    "type": "OAuthException",
+    "code": 100,
+    "fbtrace_id": "A-wJn41YxbR7JC6CI424nnf"
+  }
+}
+ERROR 2026-02-12 18:41:44,892 whatsapp_utils ✗ WhatsApp invitation failed for Familia (255713241438): HTTP 400: {"error":{"message":"(#100) Param template['components'][0]['parameters'][0]['image']['link'] is not a valid URI.","type":"OAuthException","code":100,"fbtrace_id":"A-wJn41YxbR7JC6CI424nnf"}}
+INFO 2026-02-12 18:42:42,023 whatsapp_utils Starting WhatsApp invitation process for Familia (ID: 123ac348-aeec-404a-9e49-3ae98386a6bb)
+INFO 2026-02-12 18:42:42,023 whatsapp_utils Generating invitation image for Familia
+INFO 2026-02-12 18:42:42,023 whatsapp_utils Using image URL for Familia:  
+INFO 2026-02-12 18:42:42,023 whatsapp_utils Sending WhatsApp to 255713241438 with message: Dear Familia, you are cordially invited to the wedding celebration!
+ERROR 2026-02-12 18:42:42,024 whatsapp_utils Unexpected error sending WhatsApp to Familia: name 'result' is not defined
+Traceback (most recent call last):
+  File "/Users/stan/harusi/pledges/whatsapp_utils.py", line 309, in send_invitation_whatsapp
+    if result['success']:
+NameError: name 'result' is not defined
+INFO 2026-02-12 18:43:33,462 whatsapp_utils Starting WhatsApp invitation process for Familia ya Aoknai (ID: 2eb5d9cb-3a3c-4f0f-bb64-4fceacc413bf)
+INFO 2026-02-12 18:43:33,463 whatsapp_utils Generating invitation image for Familia ya Aoknai
+INFO 2026-02-12 18:43:33,621 whatsapp_utils Generated invitation image for Familia ya Aoknai: http://127.0.0.1:8000/static/invitations/invite_familia_ya_aoknai_BVR.png
+INFO 2026-02-12 18:43:33,621 whatsapp_utils Using image URL for Familia ya Aoknai: http://127.0.0.1:8000/static/invitations/invite_familia_ya_aoknai_BVR.png
+INFO 2026-02-12 18:43:33,621 whatsapp_utils Sending WhatsApp to 255719340831 with message: Dear Familia ya Aoknai, you are cordially invited to the wedding celebration!
+ERROR 2026-02-12 18:43:33,621 whatsapp_utils Unexpected error sending WhatsApp to Familia ya Aoknai: name 'result' is not defined
+Traceback (most recent call last):
+  File "/Users/stan/harusi/pledges/whatsapp_utils.py", line 309, in send_invitation_whatsapp
+    if result['success']:
+NameError: name 'result' is not defined
+INFO 2026-02-12 18:45:13,679 whatsapp_utils Starting WhatsApp invitation process for Familia (ID: 123ac348-aeec-404a-9e49-3ae98386a6bb)
+INFO 2026-02-12 18:45:13,680 whatsapp_utils Generating invitation image for Familia
+INFO 2026-02-12 18:45:13,680 whatsapp_utils Using image URL for Familia:  
+INFO 2026-02-12 18:45:13,680 whatsapp_utils Sending WhatsApp to 255713241438 with message: Dear Familia, you are cordially invited to the wedding celebration!
+ERROR 2026-02-12 18:45:13,680 whatsapp_utils Unexpected error sending WhatsApp to Familia: name 'result' is not defined
+Traceback (most recent call last):
+  File "/Users/stan/harusi/pledges/whatsapp_utils.py", line 309, in send_invitation_whatsapp
+    if result['success']:
+NameError: name 'result' is not defined
+INFO 2026-02-12 18:45:33,844 whatsapp_utils Starting WhatsApp invitation process for Familia ya Aoknai (ID: 2eb5d9cb-3a3c-4f0f-bb64-4fceacc413bf)
+INFO 2026-02-12 18:45:33,845 whatsapp_utils Generating invitation image for Familia ya Aoknai
+INFO 2026-02-12 18:45:34,010 whatsapp_utils Generated invitation image for Familia ya Aoknai: http://127.0.0.1:8000/static/invitations/invite_familia_ya_aoknai_BVR.png
+INFO 2026-02-12 18:45:34,010 whatsapp_utils Using image URL for Familia ya Aoknai: http://127.0.0.1:8000/static/invitations/invite_familia_ya_aoknai_BVR.png
+INFO 2026-02-12 18:45:34,010 whatsapp_utils Sending WhatsApp to 255719340831 with message: Dear Familia ya Aoknai, you are cordially invited to the wedding celebration!
+ERROR 2026-02-12 18:45:34,010 whatsapp_utils Unexpected error sending WhatsApp to Familia ya Aoknai: name 'result' is not defined
+Traceback (most recent call last):
+  File "/Users/stan/harusi/pledges/whatsapp_utils.py", line 309, in send_invitation_whatsapp
+    if result['success']:
+NameError: name 'result' is not defined
+INFO 2026-02-12 18:46:18,631 whatsapp_utils Starting WhatsApp invitation process for Familia ya Aoknai (ID: 2eb5d9cb-3a3c-4f0f-bb64-4fceacc413bf)
+INFO 2026-02-12 18:46:18,631 whatsapp_utils Generating invitation image for Familia ya Aoknai
+INFO 2026-02-12 18:46:18,782 whatsapp_utils Generated invitation image for Familia ya Aoknai: http://127.0.0.1:8000/static/invitations/invite_familia_ya_aoknai_BVR.png
+INFO 2026-02-12 18:46:18,783 whatsapp_utils Using image URL for Familia ya Aoknai: http://127.0.0.1:8000/static/invitations/invite_familia_ya_aoknai_BVR.png
+INFO 2026-02-12 18:46:18,783 whatsapp_utils Sending WhatsApp to 255719340831 with message: Dear Familia ya Aoknai, you are cordially invited to the wedding celebration!
+ERROR 2026-02-12 18:46:18,783 whatsapp_utils Unexpected error sending WhatsApp to Familia ya Aoknai: name 'result' is not defined
+Traceback (most recent call last):
+  File "/Users/stan/harusi/pledges/whatsapp_utils.py", line 309, in send_invitation_whatsapp
+    if result['success']:
+NameError: name 'result' is not defined
+INFO 2026-02-12 18:47:01,261 whatsapp_utils Starting WhatsApp invitation process for Familia ya Aoknai (ID: 2eb5d9cb-3a3c-4f0f-bb64-4fceacc413bf)
+INFO 2026-02-12 18:47:01,261 whatsapp_utils Generating invitation image for Familia ya Aoknai
+INFO 2026-02-12 18:47:01,416 whatsapp_utils Generated invitation image for Familia ya Aoknai: http://127.0.0.1:8000/static/invitations/invite_familia_ya_aoknai_BVR.png
+INFO 2026-02-12 18:47:01,416 whatsapp_utils Using image URL for Familia ya Aoknai: http://127.0.0.1:8000/static/invitations/invite_familia_ya_aoknai_BVR.png
+INFO 2026-02-12 18:47:01,416 whatsapp_utils Sending WhatsApp to 255719340831 with message: Dear Familia ya Aoknai, you are cordially invited to the wedding celebration!
+ERROR 2026-02-12 18:47:01,416 whatsapp_utils Unexpected error sending WhatsApp to Familia ya Aoknai: name 'result' is not defined
+Traceback (most recent call last):
+  File "/Users/stan/harusi/pledges/whatsapp_utils.py", line 309, in send_invitation_whatsapp
+    if result['success']:
+NameError: name 'result' is not defined
+INFO 2026-02-12 18:47:32,465 whatsapp_utils Starting WhatsApp invitation process for Familia ya Aoknai (ID: 2eb5d9cb-3a3c-4f0f-bb64-4fceacc413bf)
+INFO 2026-02-12 18:47:32,465 whatsapp_utils Generating invitation image for Familia ya Aoknai
+INFO 2026-02-12 18:47:32,615 whatsapp_utils Generated invitation image for Familia ya Aoknai: http://127.0.0.1:8000/static/invitations/invite_familia_ya_aoknai_BVR.png
+INFO 2026-02-12 18:47:32,616 whatsapp_utils Using image URL for Familia ya Aoknai: http://127.0.0.1:8000/static/invitations/invite_familia_ya_aoknai_BVR.png
+INFO 2026-02-12 18:47:32,616 whatsapp_utils Sending WhatsApp to 255719340831 with message: Dear Familia ya Aoknai, you are cordially invited to the wedding celebration!
+ERROR 2026-02-12 18:47:32,616 whatsapp_utils Unexpected error sending WhatsApp to Familia ya Aoknai: name 'result' is not defined
+Traceback (most recent call last):
+  File "/Users/stan/harusi/pledges/whatsapp_utils.py", line 309, in send_invitation_whatsapp
+    if result['success']:
+NameError: name 'result' is not defined
+INFO 2026-02-12 18:48:11,236 whatsapp_utils Starting WhatsApp invitation process for Familia ya Aoknai (ID: 2eb5d9cb-3a3c-4f0f-bb64-4fceacc413bf)
+INFO 2026-02-12 18:48:11,236 whatsapp_utils Generating invitation image for Familia ya Aoknai
+INFO 2026-02-12 18:48:11,391 whatsapp_utils Generated invitation image for Familia ya Aoknai: http://127.0.0.1:8000/static/invitations/invite_familia_ya_aoknai_BVR.png
+INFO 2026-02-12 18:48:11,391 whatsapp_utils Using image URL for Familia ya Aoknai: http://127.0.0.1:8000/static/invitations/invite_familia_ya_aoknai_BVR.png
+INFO 2026-02-12 18:48:11,391 whatsapp_utils Sending WhatsApp to 255719340831 with message: Dear Familia ya Aoknai, you are cordially invited to the wedding celebration!
+ERROR 2026-02-12 18:48:11,391 whatsapp_utils Unexpected error sending WhatsApp to Familia ya Aoknai: name 'result' is not defined
+Traceback (most recent call last):
+  File "/Users/stan/harusi/pledges/whatsapp_utils.py", line 309, in send_invitation_whatsapp
+    if result['success']:
+NameError: name 'result' is not defined
+INFO 2026-02-12 18:48:46,173 whatsapp_utils Starting WhatsApp invitation process for Familia ya Aoknai (ID: 2eb5d9cb-3a3c-4f0f-bb64-4fceacc413bf)
+INFO 2026-02-12 18:48:46,173 whatsapp_utils Generating invitation image for Familia ya Aoknai
+INFO 2026-02-12 18:48:46,318 whatsapp_utils Generated invitation image for Familia ya Aoknai: http://127.0.0.1:8000/static/invitations/invite_familia_ya_aoknai_BVR.png
+INFO 2026-02-12 18:48:46,318 whatsapp_utils Using image URL for Familia ya Aoknai: http://127.0.0.1:8000/static/invitations/invite_familia_ya_aoknai_BVR.png
+INFO 2026-02-12 18:48:46,318 whatsapp_utils Sending WhatsApp to 255719340831 with message: Dear Familia ya Aoknai, you are cordially invited to the wedding celebration!
+ERROR 2026-02-12 18:48:46,318 whatsapp_utils Unexpected error sending WhatsApp to Familia ya Aoknai: name 'result' is not defined
+Traceback (most recent call last):
+  File "/Users/stan/harusi/pledges/whatsapp_utils.py", line 309, in send_invitation_whatsapp
+    if result['success']:
+NameError: name 'result' is not defined
+INFO 2026-02-12 18:52:27,053 whatsapp_utils Starting WhatsApp invitation process for Familia ya Aoknai (ID: 2eb5d9cb-3a3c-4f0f-bb64-4fceacc413bf)
+INFO 2026-02-12 18:52:27,054 whatsapp_utils Generating invitation image for Familia ya Aoknai
+INFO 2026-02-12 18:52:27,207 whatsapp_utils Generated invitation image for Familia ya Aoknai: http://127.0.0.1:8000/static/invitations/invite_familia_ya_aoknai_BVR.png
+INFO 2026-02-12 18:52:27,207 whatsapp_utils Using image URL for Familia ya Aoknai: http://127.0.0.1:8000/static/invitations/invite_familia_ya_aoknai_BVR.png
+INFO 2026-02-12 18:52:27,207 whatsapp_utils Sending WhatsApp to 255719340831 with message: Dear Familia ya Aoknai, you are cordially invited to the wedding celebration!
+ERROR 2026-02-12 18:52:27,207 whatsapp_utils Unexpected error sending WhatsApp to Familia ya Aoknai: name 'result' is not defined
+Traceback (most recent call last):
+  File "/Users/stan/harusi/pledges/whatsapp_utils.py", line 309, in send_invitation_whatsapp
+    if result['success']:
+NameError: name 'result' is not defined
+INFO 2026-02-12 18:56:00,614 whatsapp_utils Starting WhatsApp invitation process for Familia ya Aoknai (ID: 2eb5d9cb-3a3c-4f0f-bb64-4fceacc413bf)
+INFO 2026-02-12 18:56:00,614 whatsapp_utils Generating invitation image for Familia ya Aoknai
+INFO 2026-02-12 18:56:00,614 whatsapp_utils Using image URL for Familia ya Aoknai: http://127.0.0.1:8000/static/invitations/invite_familia_ya_aoknai_BVR.png
+INFO 2026-02-12 18:56:00,614 whatsapp_utils Sending WhatsApp to 255719340831 with message: Dear Familia ya Aoknai, you are cordially invited to the wedding celebration!
+ERROR 2026-02-12 18:56:00,614 whatsapp_utils Unexpected error sending WhatsApp to Familia ya Aoknai: name 'result' is not defined
+Traceback (most recent call last):
+  File "/Users/stan/harusi/pledges/whatsapp_utils.py", line 308, in send_invitation_whatsapp
+    if result['success']:
+NameError: name 'result' is not defined
+INFO 2026-02-12 18:56:23,616 whatsapp_utils Starting WhatsApp invitation process for Familia ya Aoknai (ID: 2eb5d9cb-3a3c-4f0f-bb64-4fceacc413bf)
+INFO 2026-02-12 18:56:23,616 whatsapp_utils Generating invitation image for Familia ya Aoknai
+INFO 2026-02-12 18:56:23,774 whatsapp_utils Generated invitation image for Familia ya Aoknai: http://127.0.0.1:8000/static/invitations/invite_familia_ya_aoknai_BVR.png
+INFO 2026-02-12 18:56:23,774 whatsapp_utils Using image URL for Familia ya Aoknai: http://127.0.0.1:8000/static/invitations/invite_familia_ya_aoknai_BVR.png
+INFO 2026-02-12 18:56:23,774 whatsapp_utils Sending WhatsApp to 255719340831 with message: Dear Familia ya Aoknai, you are cordially invited to the wedding celebration!
+ERROR 2026-02-12 18:56:23,774 whatsapp_utils Unexpected error sending WhatsApp to Familia ya Aoknai: name 'result' is not defined
+Traceback (most recent call last):
+  File "/Users/stan/harusi/pledges/whatsapp_utils.py", line 308, in send_invitation_whatsapp
+    if result['success']:
+NameError: name 'result' is not defined
+INFO 2026-02-12 19:30:57,469 whatsapp_utils Starting WhatsApp invitation process for Familia ya Aoknai (ID: 2eb5d9cb-3a3c-4f0f-bb64-4fceacc413bf)
+INFO 2026-02-12 19:30:57,470 whatsapp_utils Generating invitation image for Familia ya Aoknai
+INFO 2026-02-12 19:30:57,605 whatsapp_utils Generated invitation image for Familia ya Aoknai: http://127.0.0.1:8000/static/invitations/invite_familia_ya_aoknai_BVR.png
+INFO 2026-02-12 19:30:57,606 whatsapp_utils Using image URL for Familia ya Aoknai: http://127.0.0.1:8000/static/invitations/invite_familia_ya_aoknai_BVR.png
+INFO 2026-02-12 19:30:57,606 whatsapp_utils Sending WhatsApp to 255719340831 with message: Dear Familia ya Aoknai, you are cordially invited to the wedding celebration!
+ERROR 2026-02-12 19:30:57,606 whatsapp_utils Unexpected error sending WhatsApp to Familia ya Aoknai: name 'result' is not defined
+Traceback (most recent call last):
+  File "/Users/stan/harusi/pledges/whatsapp_utils.py", line 308, in send_invitation_whatsapp
+    if result['success']:
+NameError: name 'result' is not defined
+INFO 2026-02-12 19:50:45,280 whatsapp_utils Starting WhatsApp invitation process for Familia ya Aoknai (ID: 2eb5d9cb-3a3c-4f0f-bb64-4fceacc413bf)
+INFO 2026-02-12 19:50:45,280 whatsapp_utils Generating invitation image for Familia ya Aoknai
+INFO 2026-02-12 19:50:45,450 whatsapp_utils Generated invitation image for Familia ya Aoknai: http://127.0.0.1:8000/static/invitations/invite_familia_ya_aoknai_BVR.png
+INFO 2026-02-12 19:50:45,450 whatsapp_utils Using image URL for Familia ya Aoknai: http://127.0.0.1:8000/static/invitations/invite_familia_ya_aoknai_BVR.png
+INFO 2026-02-12 19:50:45,450 whatsapp_utils Sending WhatsApp to 255719340831 with message: Dear Familia ya Aoknai, you are cordially invited to the wedding celebration!
+ERROR 2026-02-12 19:50:45,450 whatsapp_utils Unexpected error sending WhatsApp to Familia ya Aoknai: name 'result' is not defined
+Traceback (most recent call last):
+  File "/Users/stan/harusi/pledges/whatsapp_utils.py", line 309, in send_invitation_whatsapp
+    if result['success']:
+NameError: name 'result' is not defined
+INFO 2026-02-12 19:58:34,249 whatsapp_utils Starting WhatsApp invitation process for Familia ya Aoknai (ID: 2eb5d9cb-3a3c-4f0f-bb64-4fceacc413bf)
+INFO 2026-02-12 19:58:34,250 whatsapp_utils Generating invitation image for Familia ya Aoknai
+INFO 2026-02-12 19:58:34,405 whatsapp_utils Generated invitation image for Familia ya Aoknai: http://127.0.0.1:8000/static/invitations/invite_familia_ya_aoknai_BVR.png
+INFO 2026-02-12 19:58:34,405 whatsapp_utils Using image URL for Familia ya Aoknai: http://127.0.0.1:8000/static/invitations/invite_familia_ya_aoknai_BVR.png
+INFO 2026-02-12 19:58:34,405 whatsapp_utils Sending WhatsApp to 255719340831 with message: Dear Familia ya Aoknai, you are cordially invited to the wedding celebration!
+ERROR 2026-02-12 19:58:34,405 whatsapp_utils Unexpected error sending WhatsApp to Familia ya Aoknai: name 'result' is not defined
+Traceback (most recent call last):
+  File "/Users/stan/harusi/pledges/whatsapp_utils.py", line 309, in send_invitation_whatsapp
+    if result['success']:
+NameError: name 'result' is not defined
+INFO 2026-02-12 20:00:41,648 whatsapp_utils Starting WhatsApp invitation process for Familia ya Aoknai (ID: 2eb5d9cb-3a3c-4f0f-bb64-4fceacc413bf)
+INFO 2026-02-12 20:00:41,648 whatsapp_utils Generating invitation image for Familia ya Aoknai
+INFO 2026-02-12 20:00:41,797 whatsapp_utils Generated invitation image for Familia ya Aoknai: http://127.0.0.1:8000/static/invitations/invite_familia_ya_aoknai_BVR.png
+INFO 2026-02-12 20:00:41,798 whatsapp_utils Using image URL for Familia ya Aoknai: http://127.0.0.1:8000/static/invitations/invite_familia_ya_aoknai_BVR.png
+INFO 2026-02-12 20:00:41,798 whatsapp_utils Sending WhatsApp to 255719340831 with message: Dear Familia ya Aoknai, you are cordially invited to the wedding celebration!
+ERROR 2026-02-12 20:00:41,798 whatsapp_utils Unexpected error sending WhatsApp to Familia ya Aoknai: name 'result' is not defined
+Traceback (most recent call last):
+  File "/Users/stan/harusi/pledges/whatsapp_utils.py", line 309, in send_invitation_whatsapp
+    if result['success']:
+NameError: name 'result' is not defined
+INFO 2026-02-12 20:07:17,307 whatsapp_utils Starting WhatsApp invitation process for Familia (ID: 123ac348-aeec-404a-9e49-3ae98386a6bb)
+INFO 2026-02-12 20:07:17,307 whatsapp_utils Generating invitation image for Familia
+INFO 2026-02-12 20:07:17,307 whatsapp_utils Using image URL for Familia:  
+INFO 2026-02-12 20:07:17,307 whatsapp_utils Sending WhatsApp to 255713241438 with message: Dear Familia, you are cordially invited to the wedding celebration!
+ERROR 2026-02-12 20:07:17,307 whatsapp_utils Unexpected error sending WhatsApp to Familia: name 'result' is not defined
+Traceback (most recent call last):
+  File "/Users/stan/harusi/pledges/whatsapp_utils.py", line 309, in send_invitation_whatsapp
+    if result['success']:
+NameError: name 'result' is not defined
+INFO 2026-02-12 20:07:31,932 whatsapp_utils Starting WhatsApp invitation process for Frederick Apina (ID: 508deabc-97ad-43a0-94e8-a3c0b3431cc3)
+INFO 2026-02-12 20:07:31,932 whatsapp_utils Generating invitation image for Frederick Apina
+INFO 2026-02-12 20:07:31,932 whatsapp_utils Using image URL for Frederick Apina: http://127.0.0.1:8000/static/invitations/invite_frederick_apina_FDB.png
+INFO 2026-02-12 20:07:31,933 whatsapp_utils Sending WhatsApp to 255712711577 with message: Dear Frederick Apina, you are cordially invited to the wedding celebration!
+ERROR 2026-02-12 20:07:31,933 whatsapp_utils Unexpected error sending WhatsApp to Frederick Apina: name 'result' is not defined
+Traceback (most recent call last):
+  File "/Users/stan/harusi/pledges/whatsapp_utils.py", line 309, in send_invitation_whatsapp
+    if result['success']:
+NameError: name 'result' is not defined
+INFO 2026-02-12 20:07:49,623 whatsapp_utils Starting WhatsApp invitation process for Familia ya Aoknai (ID: 2eb5d9cb-3a3c-4f0f-bb64-4fceacc413bf)
+INFO 2026-02-12 20:07:49,623 whatsapp_utils Generating invitation image for Familia ya Aoknai
+INFO 2026-02-12 20:07:49,773 whatsapp_utils Generated invitation image for Familia ya Aoknai: http://127.0.0.1:8000/static/invitations/invite_familia_ya_aoknai_BVR.png
+INFO 2026-02-12 20:07:49,773 whatsapp_utils Using image URL for Familia ya Aoknai: http://127.0.0.1:8000/static/invitations/invite_familia_ya_aoknai_BVR.png
+INFO 2026-02-12 20:07:49,773 whatsapp_utils Sending WhatsApp to 255719340831 with message: Dear Familia ya Aoknai, you are cordially invited to the wedding celebration!
+ERROR 2026-02-12 20:07:49,773 whatsapp_utils Unexpected error sending WhatsApp to Familia ya Aoknai: name 'result' is not defined
+Traceback (most recent call last):
+  File "/Users/stan/harusi/pledges/whatsapp_utils.py", line 309, in send_invitation_whatsapp
+    if result['success']:
+NameError: name 'result' is not defined
+INFO 2026-02-12 20:16:56,168 whatsapp_utils Starting WhatsApp invitation process for Familia ya Aoknai (ID: 2eb5d9cb-3a3c-4f0f-bb64-4fceacc413bf)
+INFO 2026-02-12 20:16:56,169 whatsapp_utils Generating invitation image for Familia ya Aoknai
+INFO 2026-02-12 20:16:56,330 whatsapp_utils Generated invitation image for Familia ya Aoknai: http://127.0.0.1:8000/static/invitations/invite_familia_ya_aoknai_BVR.png
+INFO 2026-02-12 20:16:56,330 whatsapp_utils Using image URL for Familia ya Aoknai: http://127.0.0.1:8000/static/invitations/invite_familia_ya_aoknai_BVR.png
+INFO 2026-02-12 20:16:56,330 whatsapp_utils Sending WhatsApp to 255719340831 with message: Dear Familia ya Aoknai, you are cordially invited to the wedding celebration!
+ERROR 2026-02-12 20:16:56,330 whatsapp_utils Unexpected error sending WhatsApp to Familia ya Aoknai: name 'result' is not defined
+Traceback (most recent call last):
+  File "/Users/stan/harusi/pledges/whatsapp_utils.py", line 318, in send_invitation_whatsapp
+    if result['success']:
+NameError: name 'result' is not defined
+INFO 2026-02-12 20:18:17,045 whatsapp_utils Starting WhatsApp invitation process for Familia ya Aoknai (ID: 2eb5d9cb-3a3c-4f0f-bb64-4fceacc413bf)
+INFO 2026-02-12 20:18:17,045 whatsapp_utils Generating invitation image for Familia ya Aoknai
+INFO 2026-02-12 20:18:17,206 whatsapp_utils Generated invitation image for Familia ya Aoknai: http://127.0.0.1:8000/static/invitations/invite_familia_ya_aoknai_BVR.png
+INFO 2026-02-12 20:18:17,206 whatsapp_utils Using image URL for Familia ya Aoknai: http://127.0.0.1:8000/static/invitations/invite_familia_ya_aoknai_BVR.png
+INFO 2026-02-12 20:18:17,206 whatsapp_utils Sending WhatsApp to 255719340831 with message: Dear Familia ya Aoknai, you are cordially invited to the wedding celebration!
+ERROR 2026-02-12 20:18:17,206 whatsapp_utils Unexpected error sending WhatsApp to Familia ya Aoknai: name 'result' is not defined
+Traceback (most recent call last):
+  File "/Users/stan/harusi/pledges/whatsapp_utils.py", line 318, in send_invitation_whatsapp
+    if result['success']:
+NameError: name 'result' is not defined
+INFO 2026-02-12 20:18:59,433 whatsapp_utils Starting WhatsApp invitation process for Familia ya Aoknai (ID: 2eb5d9cb-3a3c-4f0f-bb64-4fceacc413bf)
+INFO 2026-02-12 20:18:59,433 whatsapp_utils Generating invitation image for Familia ya Aoknai
+INFO 2026-02-12 20:18:59,594 whatsapp_utils Generated invitation image for Familia ya Aoknai: http://127.0.0.1:8000/static/invitations/invite_familia_ya_aoknai_BVR.png
+INFO 2026-02-12 20:18:59,594 whatsapp_utils Using image URL for Familia ya Aoknai: http://127.0.0.1:8000/static/invitations/invite_familia_ya_aoknai_BVR.png
+INFO 2026-02-12 20:18:59,594 whatsapp_utils Sending WhatsApp to 255719340831 with message: Dear Familia ya Aoknai, you are cordially invited to the wedding celebration!
+ERROR 2026-02-12 20:18:59,594 whatsapp_utils Unexpected error sending WhatsApp to Familia ya Aoknai: name 'result' is not defined
+Traceback (most recent call last):
+  File "/Users/stan/harusi/pledges/whatsapp_utils.py", line 318, in send_invitation_whatsapp
+    if result['success']:
+NameError: name 'result' is not defined
+INFO 2026-02-12 20:19:49,458 whatsapp_utils Starting WhatsApp invitation process for Familia ya Aoknai (ID: 2eb5d9cb-3a3c-4f0f-bb64-4fceacc413bf)
+INFO 2026-02-12 20:19:49,458 whatsapp_utils Generating invitation image for Familia ya Aoknai
+INFO 2026-02-12 20:19:49,609 whatsapp_utils Generated invitation image for Familia ya Aoknai: http://127.0.0.1:8000/static/invitations/invite_familia_ya_aoknai_BVR.png
+INFO 2026-02-12 20:19:49,609 whatsapp_utils Using image URL for Familia ya Aoknai: http://127.0.0.1:8000/static/invitations/invite_familia_ya_aoknai_BVR.png
+INFO 2026-02-12 20:19:49,609 whatsapp_utils Sending WhatsApp to 255719340831 with message: Dear Familia ya Aoknai, you are cordially invited to the wedding celebration!
+ERROR 2026-02-12 20:19:49,609 whatsapp_utils Unexpected error sending WhatsApp to Familia ya Aoknai: name 'result' is not defined
+Traceback (most recent call last):
+  File "/Users/stan/harusi/pledges/whatsapp_utils.py", line 318, in send_invitation_whatsapp
+    if result['success']:
+NameError: name 'result' is not defined
+INFO 2026-02-12 20:22:50,650 whatsapp_utils Starting WhatsApp invitation process for Familia ya Aoknai (ID: 2eb5d9cb-3a3c-4f0f-bb64-4fceacc413bf)
+INFO 2026-02-12 20:22:50,653 whatsapp_utils Generating invitation image for Familia ya Aoknai
+INFO 2026-02-12 20:22:50,840 whatsapp_utils Generated invitation image for Familia ya Aoknai: http://127.0.0.1:8000/static/invitations/invite_familia_ya_aoknai_BVR.png
+INFO 2026-02-12 20:22:50,840 whatsapp_utils Using image URL for Familia ya Aoknai: http://127.0.0.1:8000/static/invitations/invite_familia_ya_aoknai_BVR.png
+INFO 2026-02-12 20:22:50,840 whatsapp_utils Sending WhatsApp to 255719340831 with message: Dear Familia ya Aoknai, you are cordially invited to the wedding celebration!
+ERROR 2026-02-12 20:22:50,840 whatsapp_utils Unexpected error sending WhatsApp to Familia ya Aoknai: name 'result' is not defined
+Traceback (most recent call last):
+  File "/Users/stan/harusi/pledges/whatsapp_utils.py", line 318, in send_invitation_whatsapp
+    if result['success']:
+NameError: name 'result' is not defined
+INFO 2026-02-12 20:24:29,691 whatsapp_utils Starting WhatsApp invitation process for Familia ya Aoknai (ID: 2eb5d9cb-3a3c-4f0f-bb64-4fceacc413bf)
+INFO 2026-02-12 20:24:29,691 whatsapp_utils Generating invitation image for Familia ya Aoknai
+INFO 2026-02-12 20:24:29,849 whatsapp_utils Generated invitation image for Familia ya Aoknai: http://127.0.0.1:8000/static/invitations/invite_familia_ya_aoknai_BVR.png
+INFO 2026-02-12 20:24:29,849 whatsapp_utils Using image URL for Familia ya Aoknai: http://127.0.0.1:8000/static/invitations/invite_familia_ya_aoknai_BVR.png
+INFO 2026-02-12 20:24:29,849 whatsapp_utils Sending WhatsApp to 255719340831 with message: Dear Familia ya Aoknai, you are cordially invited to the wedding celebration!
+ERROR 2026-02-12 20:24:29,849 whatsapp_utils Unexpected error sending WhatsApp to Familia ya Aoknai: name 'result' is not defined
+Traceback (most recent call last):
+  File "/Users/stan/harusi/pledges/whatsapp_utils.py", line 318, in send_invitation_whatsapp
+    if result['success']:
+NameError: name 'result' is not defined
+INFO 2026-02-12 20:28:51,328 whatsapp_utils Starting WhatsApp invitation process for Familia ya Aoknai (ID: 2eb5d9cb-3a3c-4f0f-bb64-4fceacc413bf)
+INFO 2026-02-12 20:28:51,328 whatsapp_utils Generating invitation image for Familia ya Aoknai
+INFO 2026-02-12 20:28:51,485 whatsapp_utils Generated invitation image for Familia ya Aoknai: http://127.0.0.1:8000/static/invitations/invite_familia_ya_aoknai_BVR.png
+INFO 2026-02-12 20:28:51,485 whatsapp_utils Using image URL for Familia ya Aoknai: http://127.0.0.1:8000/static/invitations/invite_familia_ya_aoknai_BVR.png
+INFO 2026-02-12 20:28:51,485 whatsapp_utils Sending WhatsApp to 255719340831 with message: Dear Familia ya Aoknai, you are cordially invited to the wedding celebration!
+ERROR 2026-02-12 20:28:51,485 whatsapp_utils Unexpected error sending WhatsApp to Familia ya Aoknai: name 'result' is not defined
+Traceback (most recent call last):
+  File "/Users/stan/harusi/pledges/whatsapp_utils.py", line 318, in send_invitation_whatsapp
+    if result['success']:
+NameError: name 'result' is not defined
+INFO 2026-02-12 20:36:46,304 whatsapp_utils Starting WhatsApp invitation process for Familia ya Aoknai (ID: 2eb5d9cb-3a3c-4f0f-bb64-4fceacc413bf)
+INFO 2026-02-12 20:36:46,305 whatsapp_utils Generating invitation image for Familia ya Aoknai
+INFO 2026-02-12 20:36:46,469 whatsapp_utils Generated invitation image for Familia ya Aoknai: http://127.0.0.1:8000/static/invitations/invite_familia_ya_aoknai_BVR.png
+INFO 2026-02-12 20:36:46,469 whatsapp_utils Using image URL for Familia ya Aoknai: http://127.0.0.1:8000/static/invitations/invite_familia_ya_aoknai_BVR.png
+INFO 2026-02-12 20:36:46,469 whatsapp_utils Sending WhatsApp to 255719340831 with message: Dear Familia ya Aoknai, you are cordially invited to the wedding celebration!
+ERROR 2026-02-12 20:36:46,469 whatsapp_utils Unexpected error sending WhatsApp to Familia ya Aoknai: name 'result' is not defined
+Traceback (most recent call last):
+  File "/Users/stan/harusi/pledges/whatsapp_utils.py", line 318, in send_invitation_whatsapp
+    if result['success']:
+NameError: name 'result' is not defined
+INFO 2026-02-12 20:44:40,948 whatsapp_utils Starting WhatsApp invitation process for Familia ya Aoknai (ID: 2eb5d9cb-3a3c-4f0f-bb64-4fceacc413bf)
+INFO 2026-02-12 20:44:40,948 whatsapp_utils Generating invitation image for Familia ya Aoknai
+INFO 2026-02-12 20:44:40,948 whatsapp_utils Using image URL for Familia ya Aoknai: http://127.0.0.1:8000/static/invitations/invite_familia_ya_aoknai_BVR.png
+INFO 2026-02-12 20:44:40,948 whatsapp_utils Sending WhatsApp to 255719340831 with message: Dear Familia ya Aoknai, you are cordially invited to the wedding celebration!
+ERROR 2026-02-12 20:44:40,948 whatsapp_utils Unexpected error sending WhatsApp to Familia ya Aoknai: name 'result' is not defined
+Traceback (most recent call last):
+  File "/Users/stan/harusi/pledges/whatsapp_utils.py", line 319, in send_invitation_whatsapp
+    if result['success']:
+NameError: name 'result' is not defined
+INFO 2026-02-12 20:45:05,048 whatsapp_utils Starting WhatsApp invitation process for Familia ya Aoknai (ID: 2eb5d9cb-3a3c-4f0f-bb64-4fceacc413bf)
+INFO 2026-02-12 20:45:05,048 whatsapp_utils Generating invitation image for Familia ya Aoknai
+INFO 2026-02-12 20:45:05,049 whatsapp_utils Using image URL for Familia ya Aoknai: http://127.0.0.1:8000/static/invitations/invite_familia_ya_aoknai_BVR.png
+INFO 2026-02-12 20:46:11,888 whatsapp_utils Starting WhatsApp invitation process for Familia ya Aoknai (ID: 2eb5d9cb-3a3c-4f0f-bb64-4fceacc413bf)
+INFO 2026-02-12 20:50:11,974 whatsapp_utils Starting WhatsApp invitation process for Familia ya Aoknai (ID: 2eb5d9cb-3a3c-4f0f-bb64-4fceacc413bf)
+INFO 2026-02-12 20:51:18,392 whatsapp_utils Sending WhatsApp to 255719340831 with message: Dear Familia ya Aoknai, you are cordially invited to the wedding celebration!
+INFO 2026-02-12 20:51:18,397 whatsapp_utils Generating invitation image for Familia ya Aoknai
+INFO 2026-02-12 20:51:18,400 whatsapp_utils Generating invitation image for Familia ya Aoknai
+ERROR 2026-02-12 20:51:18,409 whatsapp_utils Unexpected error sending WhatsApp to Familia ya Aoknai: name 'result' is not defined
+Traceback (most recent call last):
+  File "/Users/stan/harusi/pledges/whatsapp_utils.py", line 319, in send_invitation_whatsapp
+    if result['success']:
+NameError: name 'result' is not defined
+INFO 2026-02-12 20:51:29,005 whatsapp_utils Starting WhatsApp invitation process for Familia ya Aoknai (ID: 2eb5d9cb-3a3c-4f0f-bb64-4fceacc413bf)
+INFO 2026-02-12 20:51:29,005 whatsapp_utils Generating invitation image for Familia ya Aoknai
+INFO 2026-02-12 20:51:29,156 whatsapp_utils Generated invitation image for Familia ya Aoknai: http://127.0.0.1:8000/static/invitations/invite_familia_ya_aoknai_BVR.png
+INFO 2026-02-12 20:51:29,157 whatsapp_utils Using image URL for Familia ya Aoknai: http://127.0.0.1:8000/static/invitations/invite_familia_ya_aoknai_BVR.png
+INFO 2026-02-12 20:51:29,157 whatsapp_utils Sending WhatsApp to 255719340831 with message: Dear Familia ya Aoknai, you are cordially invited to the wedding celebration!
+ERROR 2026-02-12 20:51:29,157 whatsapp_utils Unexpected error sending WhatsApp to Familia ya Aoknai: name 'result' is not defined
+Traceback (most recent call last):
+  File "/Users/stan/harusi/pledges/whatsapp_utils.py", line 319, in send_invitation_whatsapp
+    if result['success']:
+NameError: name 'result' is not defined
+INFO 2026-02-12 21:00:41,506 whatsapp_utils Starting WhatsApp invitation process for Familia ya Aoknai (ID: 2eb5d9cb-3a3c-4f0f-bb64-4fceacc413bf)
+INFO 2026-02-12 21:00:41,507 whatsapp_utils Generating invitation image for Familia ya Aoknai
+INFO 2026-02-12 21:00:41,673 whatsapp_utils Generated invitation image for Familia ya Aoknai: http://127.0.0.1:8000/static/invitations/invite_familia_ya_aoknai_BVR.png
+INFO 2026-02-12 21:00:41,673 whatsapp_utils Using image URL for Familia ya Aoknai: http://127.0.0.1:8000/static/invitations/invite_familia_ya_aoknai_BVR.png
+INFO 2026-02-12 21:00:41,673 whatsapp_utils Sending WhatsApp to 255719340831 with message: Dear Familia ya Aoknai, you are cordially invited to the wedding celebration!
+ERROR 2026-02-12 21:00:41,673 whatsapp_utils Unexpected error sending WhatsApp to Familia ya Aoknai: name 'result' is not defined
+Traceback (most recent call last):
+  File "/Users/stan/harusi/pledges/whatsapp_utils.py", line 319, in send_invitation_whatsapp
+    if result['success']:
+NameError: name 'result' is not defined
+INFO 2026-02-12 21:01:43,212 whatsapp_utils Starting WhatsApp invitation process for Familia ya Aoknai (ID: 2eb5d9cb-3a3c-4f0f-bb64-4fceacc413bf)
+INFO 2026-02-12 21:01:43,213 whatsapp_utils Generating invitation image for Familia ya Aoknai
+INFO 2026-02-12 21:01:43,370 whatsapp_utils Generated invitation image for Familia ya Aoknai: http://127.0.0.1:8000/static/invitations/invite_familia_ya_aoknai_BVR.png
+INFO 2026-02-12 21:01:43,370 whatsapp_utils Using image URL for Familia ya Aoknai: http://127.0.0.1:8000/static/invitations/invite_familia_ya_aoknai_BVR.png
+INFO 2026-02-12 21:01:43,370 whatsapp_utils Sending WhatsApp to 255719340831 with message: Dear Familia ya Aoknai, you are cordially invited to the wedding celebration!
+ERROR 2026-02-12 21:01:43,370 whatsapp_utils Unexpected error sending WhatsApp to Familia ya Aoknai: name 'result' is not defined
+Traceback (most recent call last):
+  File "/Users/stan/harusi/pledges/whatsapp_utils.py", line 319, in send_invitation_whatsapp
+    if result['success']:
+NameError: name 'result' is not defined
+INFO 2026-02-12 21:02:57,862 whatsapp_utils Starting WhatsApp invitation process for Familia ya Aoknai (ID: 2eb5d9cb-3a3c-4f0f-bb64-4fceacc413bf)
+INFO 2026-02-12 21:02:57,863 whatsapp_utils Generating invitation image for Familia ya Aoknai
+INFO 2026-02-12 21:02:58,022 whatsapp_utils Generated invitation image for Familia ya Aoknai: http://127.0.0.1:8000/static/invitations/invite_familia_ya_aoknai_BVR.png
+INFO 2026-02-12 21:02:58,023 whatsapp_utils Using image URL for Familia ya Aoknai: http://127.0.0.1:8000/static/invitations/invite_familia_ya_aoknai_BVR.png
+INFO 2026-02-12 21:02:58,023 whatsapp_utils Sending WhatsApp to 255719340831 with message: Dear Familia ya Aoknai, you are cordially invited to the wedding celebration!
+ERROR 2026-02-12 21:02:58,023 whatsapp_utils Unexpected error sending WhatsApp to Familia ya Aoknai: name 'result' is not defined
+Traceback (most recent call last):
+  File "/Users/stan/harusi/pledges/whatsapp_utils.py", line 319, in send_invitation_whatsapp
+    if result['success']:
+NameError: name 'result' is not defined
+INFO 2026-02-12 21:41:40,822 whatsapp_utils Starting WhatsApp invitation process for Familia ya Aoknai (ID: 2eb5d9cb-3a3c-4f0f-bb64-4fceacc413bf)
+INFO 2026-02-12 21:41:40,822 whatsapp_utils Generating invitation image for Familia ya Aoknai
+INFO 2026-02-12 21:41:40,961 whatsapp_utils Generated invitation image for Familia ya Aoknai: http://127.0.0.1:8000/static/invitations/invite_familia_ya_aoknai_BVR.png
+INFO 2026-02-12 21:41:40,961 whatsapp_utils Using image URL for Familia ya Aoknai: http://127.0.0.1:8000/static/invitations/invite_familia_ya_aoknai_BVR.png
+INFO 2026-02-12 21:41:40,962 whatsapp_utils Sending WhatsApp to 255719340831 with message: Dear Familia ya Aoknai, you are cordially invited to the wedding celebration!
+ERROR 2026-02-12 21:41:40,962 whatsapp_utils Unexpected error sending WhatsApp to Familia ya Aoknai: name 'result' is not defined
+Traceback (most recent call last):
+  File "/Users/stan/harusi/pledges/whatsapp_utils.py", line 319, in send_invitation_whatsapp
+    if result['success']:
+NameError: name 'result' is not defined
+INFO 2026-02-12 21:42:55,243 whatsapp_utils Starting WhatsApp invitation process for Familia ya Aoknai (ID: 2eb5d9cb-3a3c-4f0f-bb64-4fceacc413bf)
+INFO 2026-02-12 21:42:55,244 whatsapp_utils Generating invitation image for Familia ya Aoknai
+INFO 2026-02-12 21:42:55,408 whatsapp_utils Generated invitation image for Familia ya Aoknai: http://127.0.0.1:8000/static/invitations/invite_familia_ya_aoknai_BVR.png
+INFO 2026-02-12 21:42:55,408 whatsapp_utils Using image URL for Familia ya Aoknai: http://127.0.0.1:8000/static/invitations/invite_familia_ya_aoknai_BVR.png
+INFO 2026-02-12 21:42:55,408 whatsapp_utils Sending WhatsApp to 255719340831 with message: Dear Familia ya Aoknai, you are cordially invited to the wedding celebration!
+ERROR 2026-02-12 21:42:55,408 whatsapp_utils Unexpected error sending WhatsApp to Familia ya Aoknai: name 'result' is not defined
+Traceback (most recent call last):
+  File "/Users/stan/harusi/pledges/whatsapp_utils.py", line 319, in send_invitation_whatsapp
+    if result['success']:
+NameError: name 'result' is not defined
+INFO 2026-02-12 21:44:33,157 whatsapp_utils Starting WhatsApp invitation process for Familia ya Aoknai (ID: 2eb5d9cb-3a3c-4f0f-bb64-4fceacc413bf)
+INFO 2026-02-12 21:44:33,158 whatsapp_utils Generating invitation image for Familia ya Aoknai
+INFO 2026-02-12 21:44:33,324 whatsapp_utils Generated invitation image for Familia ya Aoknai: http://127.0.0.1:8000/static/invitations/invite_familia_ya_aoknai_BVR.png
+INFO 2026-02-12 21:44:33,324 whatsapp_utils Using image URL for Familia ya Aoknai: http://127.0.0.1:8000/static/invitations/invite_familia_ya_aoknai_BVR.png
+INFO 2026-02-12 21:44:33,324 whatsapp_utils Sending WhatsApp to 255719340831 with message: Dear Familia ya Aoknai, you are cordially invited to the wedding celebration!
+ERROR 2026-02-12 21:44:33,324 whatsapp_utils Unexpected error sending WhatsApp to Familia ya Aoknai: name 'result' is not defined
+Traceback (most recent call last):
+  File "/Users/stan/harusi/pledges/whatsapp_utils.py", line 319, in send_invitation_whatsapp
+    if result['success']:
+NameError: name 'result' is not defined
+INFO 2026-02-12 21:46:21,713 whatsapp_utils Starting WhatsApp invitation process for Familia ya Aoknai (ID: 2eb5d9cb-3a3c-4f0f-bb64-4fceacc413bf)
+INFO 2026-02-12 21:46:21,713 whatsapp_utils Generating invitation image for Familia ya Aoknai
+INFO 2026-02-12 21:46:21,876 whatsapp_utils Generated invitation image for Familia ya Aoknai: http://127.0.0.1:8000/static/invitations/invite_familia_ya_aoknai_BVR.png
+INFO 2026-02-12 21:46:21,876 whatsapp_utils Using image URL for Familia ya Aoknai: http://127.0.0.1:8000/static/invitations/invite_familia_ya_aoknai_BVR.png
+INFO 2026-02-12 21:46:21,876 whatsapp_utils Sending WhatsApp to 255719340831 with message: Dear Familia ya Aoknai, you are cordially invited to the wedding celebration!
+ERROR 2026-02-12 21:46:21,876 whatsapp_utils Unexpected error sending WhatsApp to Familia ya Aoknai: name 'result' is not defined
+Traceback (most recent call last):
+  File "/Users/stan/harusi/pledges/whatsapp_utils.py", line 319, in send_invitation_whatsapp
+    if result['success']:
+NameError: name 'result' is not defined
+INFO 2026-02-12 21:48:08,639 whatsapp_utils Starting WhatsApp invitation process for Familia ya Aoknai (ID: 2eb5d9cb-3a3c-4f0f-bb64-4fceacc413bf)
+INFO 2026-02-12 21:48:08,639 whatsapp_utils Generating invitation image for Familia ya Aoknai
+INFO 2026-02-12 21:48:08,812 whatsapp_utils Generated invitation image for Familia ya Aoknai: http://127.0.0.1:8000/static/invitations/invite_familia_ya_aoknai_BVR.png
+INFO 2026-02-12 21:48:08,812 whatsapp_utils Using image URL for Familia ya Aoknai: http://127.0.0.1:8000/static/invitations/invite_familia_ya_aoknai_BVR.png
+INFO 2026-02-12 21:48:08,812 whatsapp_utils Sending WhatsApp to 255719340831 with message: Dear Familia ya Aoknai, you are cordially invited to the wedding celebration!
+ERROR 2026-02-12 21:48:08,812 whatsapp_utils Unexpected error sending WhatsApp to Familia ya Aoknai: name 'result' is not defined
+Traceback (most recent call last):
+  File "/Users/stan/harusi/pledges/whatsapp_utils.py", line 319, in send_invitation_whatsapp
+    if result['success']:
+NameError: name 'result' is not defined
+INFO 2026-02-12 21:49:51,379 whatsapp_utils Starting WhatsApp invitation process for Familia ya Aoknai (ID: 2eb5d9cb-3a3c-4f0f-bb64-4fceacc413bf)
+INFO 2026-02-12 21:49:51,379 whatsapp_utils Generating invitation image for Familia ya Aoknai
+INFO 2026-02-12 21:49:51,539 whatsapp_utils Generated invitation image for Familia ya Aoknai: http://127.0.0.1:8000/static/invitations/invite_familia_ya_aoknai_BVR.png
+INFO 2026-02-12 21:49:51,539 whatsapp_utils Using image URL for Familia ya Aoknai: http://127.0.0.1:8000/static/invitations/invite_familia_ya_aoknai_BVR.png
+INFO 2026-02-12 21:49:51,539 whatsapp_utils Sending WhatsApp to 255719340831 with message: Dear Familia ya Aoknai, you are cordially invited to the wedding celebration!
+ERROR 2026-02-12 21:49:51,539 whatsapp_utils Unexpected error sending WhatsApp to Familia ya Aoknai: name 'result' is not defined
+Traceback (most recent call last):
+  File "/Users/stan/harusi/pledges/whatsapp_utils.py", line 319, in send_invitation_whatsapp
+    if result['success']:
+NameError: name 'result' is not defined
+INFO 2026-02-12 21:51:14,521 whatsapp_utils Starting WhatsApp invitation process for Familia ya Aoknai (ID: 2eb5d9cb-3a3c-4f0f-bb64-4fceacc413bf)
+INFO 2026-02-12 21:51:14,521 whatsapp_utils Generating invitation image for Familia ya Aoknai
+INFO 2026-02-12 21:51:14,521 whatsapp_utils Using image URL for Familia ya Aoknai: http://127.0.0.1:8000/static/invitations/invite_familia_ya_aoknai_BVR.png
+INFO 2026-02-12 21:51:14,521 whatsapp_utils Sending WhatsApp to 255719340831 with message: Dear Familia ya Aoknai, you are cordially invited to the wedding celebration!
+ERROR 2026-02-12 21:51:14,521 whatsapp_utils Unexpected error sending WhatsApp to Familia ya Aoknai: name 'result' is not defined
+Traceback (most recent call last):
+  File "/Users/stan/harusi/pledges/whatsapp_utils.py", line 319, in send_invitation_whatsapp
+    if result['success']:
+NameError: name 'result' is not defined
+INFO 2026-02-12 21:54:21,685 whatsapp_utils Starting WhatsApp invitation process for Familia ya Aoknai (ID: 2eb5d9cb-3a3c-4f0f-bb64-4fceacc413bf)
+INFO 2026-02-12 21:54:21,686 whatsapp_utils Generating invitation image for Familia ya Aoknai
+ERROR 2026-02-12 21:54:21,686 whatsapp_utils Template image not found: /Users/stan/harusi/static/invitations/template.png
+ERROR 2026-02-12 21:54:21,686 whatsapp_utils Image generation failed for Familia ya Aoknai: Failed to generate invitation image
+INFO 2026-02-12 21:54:55,883 whatsapp_utils Starting WhatsApp invitation process for Familia ya Aoknai (ID: 2eb5d9cb-3a3c-4f0f-bb64-4fceacc413bf)
+INFO 2026-02-12 21:54:55,884 whatsapp_utils Generating invitation image for Familia ya Aoknai
+ERROR 2026-02-12 21:54:55,884 whatsapp_utils Template image not found: /Users/stan/harusi/static/invitations/template.png
+ERROR 2026-02-12 21:54:55,884 whatsapp_utils Image generation failed for Familia ya Aoknai: Failed to generate invitation image
+INFO 2026-02-12 21:55:33,794 whatsapp_utils Starting WhatsApp invitation process for Familia ya Aoknai (ID: 2eb5d9cb-3a3c-4f0f-bb64-4fceacc413bf)
+INFO 2026-02-12 21:55:33,795 whatsapp_utils Generating invitation image for Familia ya Aoknai
+INFO 2026-02-12 21:55:33,969 whatsapp_utils Generated invitation image for Familia ya Aoknai: http://127.0.0.1:8000/static/invitations/invite_familia_ya_aoknai_BVR.png
+INFO 2026-02-12 21:55:33,969 whatsapp_utils Using image URL for Familia ya Aoknai: http://127.0.0.1:8000/static/invitations/invite_familia_ya_aoknai_BVR.png
+INFO 2026-02-12 21:55:33,969 whatsapp_utils Sending WhatsApp to 255719340831 with message: Dear Familia ya Aoknai, you are cordially invited to the wedding celebration!
+ERROR 2026-02-12 21:55:33,969 whatsapp_utils Unexpected error sending WhatsApp to Familia ya Aoknai: name 'result' is not defined
+Traceback (most recent call last):
+  File "/Users/stan/harusi/pledges/whatsapp_utils.py", line 319, in send_invitation_whatsapp
+    if result['success']:
+NameError: name 'result' is not defined
+INFO 2026-02-12 21:57:16,506 whatsapp_utils Starting WhatsApp invitation process for Familia ya Aoknai (ID: 2eb5d9cb-3a3c-4f0f-bb64-4fceacc413bf)
+INFO 2026-02-12 21:57:16,507 whatsapp_utils Generating invitation image for Familia ya Aoknai
+INFO 2026-02-12 21:57:16,699 whatsapp_utils Generated invitation image for Familia ya Aoknai: http://127.0.0.1:8000/static/invitations/invite_familia_ya_aoknai_BVR.png
+INFO 2026-02-12 21:57:16,700 whatsapp_utils Using image URL for Familia ya Aoknai: http://127.0.0.1:8000/static/invitations/invite_familia_ya_aoknai_BVR.png
+INFO 2026-02-12 21:57:16,700 whatsapp_utils Sending WhatsApp to 255719340831 with message: Dear Familia ya Aoknai, you are cordially invited to the wedding celebration!
+ERROR 2026-02-12 21:57:16,700 whatsapp_utils Unexpected error sending WhatsApp to Familia ya Aoknai: name 'result' is not defined
+Traceback (most recent call last):
+  File "/Users/stan/harusi/pledges/whatsapp_utils.py", line 319, in send_invitation_whatsapp
+    if result['success']:
+NameError: name 'result' is not defined
+INFO 2026-02-12 21:58:30,272 whatsapp_utils Starting WhatsApp invitation process for Familia ya Aoknai (ID: 2eb5d9cb-3a3c-4f0f-bb64-4fceacc413bf)
+INFO 2026-02-12 21:58:30,273 whatsapp_utils Generating invitation image for Familia ya Aoknai
+INFO 2026-02-12 21:58:30,439 whatsapp_utils Generated invitation image for Familia ya Aoknai: http://127.0.0.1:8000/static/invitations/invite_familia_ya_aoknai_BVR.png
+INFO 2026-02-12 21:58:30,439 whatsapp_utils Using image URL for Familia ya Aoknai: http://127.0.0.1:8000/static/invitations/invite_familia_ya_aoknai_BVR.png
+INFO 2026-02-12 21:58:30,439 whatsapp_utils Sending WhatsApp to 255719340831 with message: Dear Familia ya Aoknai, you are cordially invited to the wedding celebration!
+ERROR 2026-02-12 21:58:30,439 whatsapp_utils Unexpected error sending WhatsApp to Familia ya Aoknai: name 'result' is not defined
+Traceback (most recent call last):
+  File "/Users/stan/harusi/pledges/whatsapp_utils.py", line 319, in send_invitation_whatsapp
+    if result['success']:
+NameError: name 'result' is not defined
+INFO 2026-02-12 21:59:26,755 whatsapp_utils Starting WhatsApp invitation process for Familia ya Aoknai (ID: 2eb5d9cb-3a3c-4f0f-bb64-4fceacc413bf)
+INFO 2026-02-12 21:59:26,755 whatsapp_utils Generating invitation image for Familia ya Aoknai
+INFO 2026-02-12 21:59:26,920 whatsapp_utils Generated invitation image for Familia ya Aoknai: http://127.0.0.1:8000/static/invitations/invite_familia_ya_aoknai_BVR.png
+INFO 2026-02-12 21:59:26,921 whatsapp_utils Using image URL for Familia ya Aoknai: http://127.0.0.1:8000/static/invitations/invite_familia_ya_aoknai_BVR.png
+INFO 2026-02-12 21:59:26,921 whatsapp_utils Sending WhatsApp to 255719340831 with message: Dear Familia ya Aoknai, you are cordially invited to the wedding celebration!
+ERROR 2026-02-12 21:59:26,921 whatsapp_utils Unexpected error sending WhatsApp to Familia ya Aoknai: name 'result' is not defined
+Traceback (most recent call last):
+  File "/Users/stan/harusi/pledges/whatsapp_utils.py", line 319, in send_invitation_whatsapp
+    if result['success']:
+NameError: name 'result' is not defined
+INFO 2026-02-12 22:03:48,959 whatsapp_utils Starting WhatsApp invitation process for Familia ya Aoknai (ID: 2eb5d9cb-3a3c-4f0f-bb64-4fceacc413bf)
+INFO 2026-02-12 22:03:48,959 whatsapp_utils Generating invitation image for Familia ya Aoknai
+INFO 2026-02-12 22:03:49,120 whatsapp_utils Generated invitation image for Familia ya Aoknai: http://127.0.0.1:8000/static/invitations/invite_familia_ya_aoknai_BVR.png
+INFO 2026-02-12 22:03:49,120 whatsapp_utils Using image URL for Familia ya Aoknai: http://127.0.0.1:8000/static/invitations/invite_familia_ya_aoknai_BVR.png
+INFO 2026-02-12 22:03:49,120 whatsapp_utils Sending WhatsApp to 255719340831 with message: Dear Familia ya Aoknai, you are cordially invited to the wedding celebration!
+ERROR 2026-02-12 22:03:49,120 whatsapp_utils Unexpected error sending WhatsApp to Familia ya Aoknai: name 'result' is not defined
+Traceback (most recent call last):
+  File "/Users/stan/harusi/pledges/whatsapp_utils.py", line 319, in send_invitation_whatsapp
+    if result['success']:
+NameError: name 'result' is not defined
