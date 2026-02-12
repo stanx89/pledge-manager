@@ -1,0 +1,127 @@
+{% extends 'pledges/base.html' %}
+
+{% block title %}Edit Record{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h4><i class="fas fa-edit me-2"></i>Edit Pledge Record</h4>
+            </div>
+            <div class="card-body">
+                <form method="post">
+                    {% csrf_token %}
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="{{ form.mobile_number.id_for_label }}" class="form-label">
+                                    <i class="fas fa-phone me-2"></i>Mobile Number
+                                </label>
+                                {{ form.mobile_number }}
+                                {% if form.mobile_number.errors %}
+                                    <div class="invalid-feedback d-block">
+                                        {% for error in form.mobile_number.errors %}
+                                            {{ error }}
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <label for="{{ form.name.id_for_label }}" class="form-label">
+                                    <i class="fas fa-user me-2"></i>Name
+                                </label>
+                                {{ form.name }}
+                                {% if form.name.errors %}
+                                    <div class="invalid-feedback d-block">
+                                        {% for error in form.name.errors %}
+                                            {{ error }}
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label for="{{ form.pledge.id_for_label }}" class="form-label">
+                                    <i class="fas fa-hand-holding-heart me-2"></i>Pledge Amount
+                                </label>
+                                {{ form.pledge }}
+                                {% if form.pledge.errors %}
+                                    <div class="invalid-feedback d-block">
+                                        {% for error in form.pledge.errors %}
+                                            {{ error }}
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label for="{{ form.paid.id_for_label }}" class="form-label">
+                                    <i class="fas fa-dollar-sign me-2"></i>Paid Amount
+                                </label>
+                                {{ form.paid }}
+                                {% if form.paid.errors %}
+                                    <div class="invalid-feedback d-block">
+                                        {% for error in form.paid.errors %}
+                                            {{ error }}
+                                        {% endfor %}
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="mb-3">
+                                <label class="form-label">
+                                    <i class="fas fa-calculator me-2"></i>Remaining Amount
+                                </label>
+                                <input type="text" class="form-control" value="${{ record.remaining }}" readonly>
+                                <small class="form-text text-muted">Automatically calculated</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <div class="form-check">
+                                    {{ form.normal_message_sent }}
+                                    <label class="form-check-label" for="{{ form.normal_message_sent.id_for_label }}">
+                                        <i class="fas fa-sms me-2"></i>Normal Message Sent
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <div class="form-check">
+                                    {{ form.whatsapp_sent }}
+                                    <label class="form-check-label" for="{{ form.whatsapp_sent.id_for_label }}">
+                                        <i class="fab fa-whatsapp me-2"></i>WhatsApp Message Sent
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <a href="{% url 'pledge_list' %}" class="btn btn-secondary me-md-2">
+                            <i class="fas fa-arrow-left me-2"></i>Cancel
+                        </a>
+                        <button type="submit" class="btn btn-success">
+                            <i class="fas fa-save me-2"></i>Save Changes
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

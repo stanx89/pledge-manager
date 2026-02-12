@@ -1,0 +1,367 @@
+{% extends 'pledges/base.html' %}
+{% load humanize %}
+
+{% block title %}Pledge Records{% endblock %}
+
+{% block content %}
+<!-- Header Section -->
+<div class="sticky top-0 z-10 bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-6">
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between space-y-4 md:space-y-0">
+        <div>
+            <h1 class="text-3xl font-bold text-gray-900">Wedding Pledge Records</h1>
+            <div class="flex items-center space-x-4 mt-2">
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
+                    <i class="fas fa-users mr-1"></i>
+                    {{ paginator.count|default:0 }} Total Records
+                </span>
+                {% if search %}
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-sm font-medium bg-green-100 text-green-800">
+                    <i class="fas fa-search mr-1"></i>
+                    Search: "{{ search }}"
+                </span>
+                {% endif %}
+            </div>
+        </div>
+        <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-3">
+            <!-- Search Form -->
+            <form method="get" class="flex">
+                <div class="relative">
+                    <input type="text" 
+                           name="search" 
+                           value="{{ search }}" 
+                           placeholder="Search by name or mobile number..."
+                           class="w-full md:w-80 pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                        <i class="fas fa-search text-gray-400"></i>
+                    </div>
+                </div>
+                <button type="submit" class="ml-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors">
+                    <i class="fas fa-search"></i>
+                </button>
+                {% if search %}
+                <a href="{% url 'pledge_list' %}" class="ml-2 px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600 transition-colors" title="Clear search">
+                    <i class="fas fa-times"></i>
+                </a>
+                {% endif %}
+            </form>
+            <!-- SMS All Button -->
+            <form method="post" action="{% url 'send_background_sms_all' %}" class="inline-flex">
+                {% csrf_token %}
+                <button type="submit" class="inline-flex items-center px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 transition-colors" onclick="return confirm('Send SMS to all unsent records? This will run in the background.')">
+                    <i class="fas fa-paper-plane mr-2"></i>
+                    SMS All Unsent
+                </button>
+            </form>
+            <!-- WhatsApp All Button -->
+            <form method="post" action="{% url 'send_background_whatsapp_all' %}" class="inline-flex">
+                {% csrf_token %}
+                <button type="submit" class="inline-flex items-center px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors" onclick="return confirm('Send WhatsApp invitations to all unsent records? This will run in the background.')">
+                    <i class="fab fa-whatsapp mr-2"></i>
+                    WhatsApp All Unsent
+                </button>
+            </form>
+            <!-- Upload Button -->
+            <a href="{% url 'upload_file' %}" class="inline-flex items-center px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors">
+                <i class="fas fa-upload mr-2"></i>
+                Upload File
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Records Table -->
+{% if pledges %}
+<div class="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+    <div class="overflow-x-auto">
+        <table class="min-w-full divide-y divide-gray-200">
+            <thead class="bg-gray-50">
+                <tr>
+                    <th class="px-2 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
+                    <th class="px-2 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Contact</th>
+                    <th class="px-2 py-2 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Pledge</th>
+                    <th class="px-2 py-2 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Paid</th>
+                    <th class="px-2 py-2 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Remaining</th>
+                    <th class="px-2 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Card</th>
+                    <th class="px-2 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Capacity</th>
+                    <th class="px-2 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">SMS</th>
+                    <th class="px-2 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">WhatsApp</th>
+                    <th class="px-2 py-2 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+                </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-gray-200">
+                {% for pledge in pledges %}
+                <tr class="{% cycle 'bg-white' 'bg-gray-50' %} hover:bg-blue-50 transition-colors">
+                    <td class="px-2 py-2">
+                        <div class="text-sm font-medium text-black">{{ pledge.name }}</div>
+                    </td>
+                    <td class="px-2 py-2">
+                        <div class="text-sm text-black font-mono">{{ pledge.mobile_number }}</div>
+                    </td>
+                    <td class="px-2 py-2 text-right">
+                        <div class="text-sm font-medium text-black">{{ pledge.pledge|floatformat:0|intcomma }}</div>
+                    </td>
+                    <td class="px-2 py-2 text-right">
+                        <div class="text-sm font-medium text-black">{{ pledge.paid|floatformat:0|intcomma }}</div>
+                    </td>
+                    <td class="px-2 py-2 text-right">
+                        <div class="text-sm font-medium text-black">
+                            {{ pledge.remaining|floatformat:0|intcomma }}
+                        </div>
+                    </td>
+                    <td class="px-2 py-2">
+                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-md text-sm font-bold bg-gray-800 text-white tracking-wider">
+                            {{ pledge.card_code }}
+                        </span>
+                    </td>
+                    <td class="px-2 py-2">
+                        <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium 
+                            {% if pledge.card_capacity == 2 %}bg-green-100 text-green-800
+                            {% elif pledge.card_capacity == 1 %}bg-yellow-100 text-yellow-800
+                            {% else %}bg-gray-100 text-gray-800{% endif %}">
+                            <i class="fas fa-users mr-1"></i>
+                            {% if pledge.card_capacity == 2 %}
+                                DOUBLE
+                            {% elif pledge.card_capacity == 1 %}
+                                SINGLE
+                            {% else %}
+                                NO ACCESS
+                            {% endif %}
+                        </span>
+                    </td>
+                    <td class="px-2 py-2">
+                        {% if pledge.normal_message_sent %}
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                <i class="fas fa-check mr-1"></i> Sent
+                            </span>
+                        {% else %}
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                                <i class="fas fa-clock mr-1"></i> Pending
+                            </span>
+                        {% endif %}
+                    </td>
+                    <td class="px-2 py-2">
+                        {% if pledge.whatsapp_sent %}
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                                <i class="fab fa-whatsapp mr-1"></i> Sent
+                            </span>
+                        {% else %}
+                            <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                                <i class="fab fa-whatsapp mr-1"></i> Pending
+                            </span>
+                        {% endif %}
+                    </td>
+                    <td class="px-2 py-2">
+                        <div class="relative inline-block text-left">
+                            <button type="button" class="inline-flex items-center justify-center w-8 h-8 text-gray-400 hover:text-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 rounded-full hover:bg-gray-100 transition-colors" onclick="toggleDropdown(event, '{{ pledge.id }}')" data-record-id="{{ pledge.id }}" data-record-name="{{ pledge.name }}">
+                                <i class="fas fa-ellipsis-v"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+<!-- Pagination -->
+{% if is_paginated %}
+<div class="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6 mt-6 rounded-lg">
+    <div class="flex flex-1 justify-between sm:hidden">
+        {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}{% if search %}&search={{ search }}{% endif %}" 
+               class="relative inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">
+                Previous
+            </a>
+        {% endif %}
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}{% if search %}&search={{ search }}{% endif %}" 
+               class="relative ml-3 inline-flex items-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50">
+                Next
+            </a>
+        {% endif %}
+    </div>
+    <div class="hidden sm:flex sm:flex-1 sm:items-center sm:justify-between">
+        <div>
+            <p class="text-sm text-gray-700">
+                Showing {{ page_obj.start_index }} to {{ page_obj.end_index }} of {{ paginator.count }} results
+            </p>
+        </div>
+        <div>
+            <nav class="isolate inline-flex -space-x-px rounded-md shadow-sm">
+                {% if page_obj.has_previous %}
+                    <a href="?page={{ page_obj.previous_page_number }}{% if search %}&search={{ search }}{% endif %}" 
+                       class="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-20">
+                        <i class="fas fa-chevron-left"></i>
+                    </a>
+                {% endif %}
+                
+                {% for num in page_obj.paginator.page_range %}
+                    {% if page_obj.number == num %}
+                        <span class="relative z-10 inline-flex items-center bg-blue-600 px-4 py-2 text-sm font-semibold text-white">
+                            {{ num }}
+                        </span>
+                    {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                        <a href="?page={{ num }}{% if search %}&search={{ search }}{% endif %}" 
+                           class="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
+                            {{ num }}
+                        </a>
+                    {% endif %}
+                {% endfor %}
+                
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}{% if search %}&search={{ search }}{% endif %}" 
+                       class="relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 hover:bg-gray-50">
+                        <i class="fas fa-chevron-right"></i>
+                    </a>
+                {% endif %}
+            </nav>
+        </div>
+    </div>
+</div>
+{% endif %}
+
+<!-- Dropdown Container -->
+<div id="dropdown-container"></div>
+
+{% else %}
+<!-- Empty State -->
+<div class="text-center py-12">
+    <div class="text-gray-400 mb-4">
+        <i class="fas fa-inbox text-6xl"></i>
+    </div>
+    <h3 class="text-lg font-medium text-gray-900 mb-2">No pledge records found</h3>
+    <p class="text-gray-500 mb-6">Get started by uploading your first file with pledge data.</p>
+    <a href="{% url 'upload_file' %}" class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors">
+        <i class="fas fa-upload mr-2"></i>
+        Upload File
+    </a>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block scripts %}
+<script>
+let currentDropdown = null;
+
+function toggleDropdown(event, pledgeId) {
+    event.stopPropagation();
+    
+    // Close any existing dropdown
+    if (currentDropdown) {
+        currentDropdown.remove();
+        currentDropdown = null;
+    }
+    
+    const button = event.target.closest('button');
+    const rect = button.getBoundingClientRect();
+    const recordId = button.getAttribute('data-record-id');
+    const recordName = button.getAttribute('data-record-name');
+    
+    // Create dropdown element
+    const dropdown = document.createElement('div');
+    dropdown.className = 'fixed w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-50';
+    dropdown.style.minWidth = '12rem';
+    
+    // Calculate position
+    let top = rect.bottom + 4;
+    let left = rect.right - 192; // 192px = 12rem (w-48)
+    
+    // Adjust if dropdown would go below viewport
+    if (top + 200 > window.innerHeight) {
+        top = rect.top - 200;
+    }
+    
+    // Adjust if dropdown would go outside left edge
+    if (left < 8) {
+        left = 8;
+    }
+    
+    // Adjust if dropdown would go outside right edge
+    if (left + 192 > window.innerWidth - 8) {
+        left = window.innerWidth - 200;
+    }
+    
+    dropdown.style.top = top + 'px';
+    dropdown.style.left = left + 'px';
+    
+    // Create dropdown content
+    dropdown.innerHTML = `
+        <div class="py-1">
+            <a href="/view/${recordId}/" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors">
+                <i class="fas fa-eye mr-3 text-blue-500"></i>
+                View Details
+            </a>
+            <a href="/edit/${recordId}/" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 transition-colors">
+                <i class="fas fa-edit mr-3 text-indigo-500"></i>
+                Edit Record
+            </a>
+            <form method="post" action="/send-sms/${recordId}/" onsubmit="return confirm('Send SMS to ${recordName}?');" style="display: contents;">
+                <input type="hidden" name="csrfmiddlewaretoken" value="${document.querySelector('[name=csrfmiddlewaretoken]').value}">
+                <button type="submit" class="flex items-center w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-green-50 hover:text-green-700 transition-colors">
+                    <i class="fas fa-sms mr-3 text-green-500"></i>
+                    Send SMS
+                </button>
+            </form>
+            <form method="post" action="/send-whatsapp/${recordId}/" onsubmit="return confirm('Send WhatsApp invitation to ${recordName}?');" style="display: contents;">
+                <input type="hidden" name="csrfmiddlewaretoken" value="${document.querySelector('[name=csrfmiddlewaretoken]').value}">
+                <button type="submit" class="flex items-center w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors">
+                    <i class="fab fa-whatsapp mr-3 text-blue-500"></i>
+                    Send WhatsApp
+                </button>
+            </form>
+            <div class="border-t border-gray-100"></div>
+            <form method="post" action="/delete/${recordId}/" onsubmit="return confirm('Are you sure you want to delete the record for ${recordName}? This action cannot be undone.');" style="display: contents;">
+                <input type="hidden" name="csrfmiddlewaretoken" value="${document.querySelector('[name=csrfmiddlewaretoken]').value}">
+                <button type="submit" class="flex items-center w-full px-4 py-2 text-sm text-gray-700 hover:bg-red-50 hover:text-red-700 transition-colors border-0 bg-transparent text-left">
+                    <i class="fas fa-trash mr-3 text-red-500"></i>
+                    Delete Record
+                </button>
+            </form>
+        </div>
+    `;
+    
+    // Add to document body
+    document.body.appendChild(dropdown);
+    currentDropdown = dropdown;
+    
+    // Add animation
+    dropdown.style.opacity = '0';
+    dropdown.style.transform = 'scale(0.95)';
+    setTimeout(() => {
+        dropdown.style.transition = 'opacity 0.1s, transform 0.1s';
+        dropdown.style.opacity = '1';
+        dropdown.style.transform = 'scale(1)';
+    }, 1);
+}
+
+// Close dropdown when clicking outside
+document.addEventListener('click', function(event) {
+    if (currentDropdown && !currentDropdown.contains(event.target)) {
+        currentDropdown.style.opacity = '0';
+        currentDropdown.style.transform = 'scale(0.95)';
+        setTimeout(() => {
+            if (currentDropdown) {
+                currentDropdown.remove();
+                currentDropdown = null;
+            }
+        }, 100);
+    }
+});
+
+// Close dropdown on escape key
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape' && currentDropdown) {
+        currentDropdown.remove();
+        currentDropdown = null;
+    }
+});
+
+// Close dropdown on scroll
+window.addEventListener('scroll', function() {
+    if (currentDropdown) {
+        currentDropdown.remove();
+        currentDropdown = null;
+    }
+});
+</script>
+{% endblock %}

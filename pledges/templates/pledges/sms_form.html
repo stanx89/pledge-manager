@@ -1,0 +1,157 @@
+{% extends 'pledges/base.html' %}
+
+{% block title %}Send SMS{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-8">
+        <div class="card">
+            <div class="card-header">
+                <h4><i class="fas fa-sms me-2"></i>Send SMS Messages</h4>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <!-- Single SMS -->
+                    <div class="col-md-6">
+                        <div class="card bg-light">
+                            <div class="card-header">
+                                <h6><i class="fas fa-user me-2"></i>Send to Individual</h6>
+                            </div>
+                            <div class="card-body">
+                                <form method="post">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="action" value="single">
+                                    
+                                    <div class="mb-3">
+                                        <label class="form-label">Select Record</label>
+                                        <select name="record_id" class="form-select" required>
+                                            <option value="">Choose a record...</option>
+                                            {% for record in records %}
+                                            <option value="{{ record.id }}">
+                                                {{ record.name }} ({{ record.mobile_number }})
+                                            </option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label class="form-label">Custom Message (Optional)</label>
+                                        <textarea name="message" class="form-control" rows="3" 
+                                                placeholder="Leave empty to use default message template"></textarea>
+                                        <div class="form-text">
+                                            Use variables: {name}, {pledge}, {paid}, {remaining}, {mobile_number}, {card_code}, {card_capacity}
+                                        </div>
+                                    </div>
+                                    
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="fas fa-paper-plane me-2"></i>Send SMS
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Bulk SMS -->
+                    <div class="col-md-6">
+                        <div class="card bg-light">
+                            <div class="card-header">
+                                <h6><i class="fas fa-users me-2"></i>Send to Multiple</h6>
+                            </div>
+                            <div class="card-body">
+                                <form method="post">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="action" value="bulk">
+                                    
+                                    <div class="mb-3">
+                                        <label class="form-label">Select Records</label>
+                                        <div style="max-height: 200px; overflow-y: auto; border: 1px solid #ddd; padding: 10px;">
+                                            {% for record in records %}
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox" 
+                                                       name="selected_records" value="{{ record.id }}" 
+                                                       id="bulk_{{ record.id }}">
+                                                <label class="form-check-label" for="bulk_{{ record.id }}">
+                                                    {{ record.name }} ({{ record.mobile_number }})
+                                                    {% if record.normal_message_sent %}
+                                                        <small class="text-success">✓ Sent</small>
+                                                    {% endif %}
+                                                </label>
+                                            </div>
+                                            {% endfor %}
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="mb-3">
+                                        <label class="form-label">Custom Message (Optional)</label>
+                                        <textarea name="message" class="form-control" rows="3" 
+                                                placeholder="Leave empty to use default message template"></textarea>
+                                        <div class="form-text">
+                                            Use variables: {name}, {pledge}, {paid}, {remaining}, {mobile_number}, {card_code}, {card_capacity}
+                                        </div>
+                                    </div>
+                                    
+                                    <button type="submit" class="btn btn-success">
+                                        <i class="fas fa-paper-plane me-2"></i>Send Bulk SMS
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-md-4">
+        <div class="card">
+            <div class="card-header">
+                <h6><i class="fas fa-info-circle me-2"></i>SMS Information</h6>
+            </div>
+            <div class="card-body">
+                <h6>Default Message Template:</h6>
+                <div class="alert alert-info">
+                    <small>{{ default_message }}</small>
+                </div>
+                
+                <h6>Quick Stats:</h6>
+                <ul class="list-unstyled">
+                    <li><strong>Total Records:</strong> {{ records.count }}</li>
+                    <li><strong>SMS Sent:</strong> {{ records|length|add:"-1"|add:records.filter.normal_message_sent.count }}</li>
+                    <li><strong>Pending SMS:</strong> {{ records|length|add:"-1"|add:records.exclude.normal_message_sent.count }}</li>
+                </ul>
+                
+                <hr>
+                <a href="{% url 'pledge_list' %}" class="btn btn-secondary btn-sm">
+                    <i class="fas fa-arrow-left me-2"></i>Back to Records
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% block scripts %}
+<script>
+// Select all checkboxes functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const selectAllBtn = document.createElement('button');
+    selectAllBtn.type = 'button';
+    selectAllBtn.className = 'btn btn-sm btn-outline-primary mb-2';
+    selectAllBtn.innerHTML = '<i class="fas fa-check-square me-1"></i>Select All';
+    
+    const checkboxContainer = document.querySelector('div[style*="max-height"]');
+    checkboxContainer.parentNode.insertBefore(selectAllBtn, checkboxContainer);
+    
+    selectAllBtn.addEventListener('click', function() {
+        const checkboxes = document.querySelectorAll('input[name="selected_records"]');
+        const allChecked = Array.from(checkboxes).every(cb => cb.checked);
+        
+        checkboxes.forEach(cb => cb.checked = !allChecked);
+        selectAllBtn.innerHTML = allChecked ? 
+            '<i class="fas fa-check-square me-1"></i>Select All' :
+            '<i class="fas fa-square me-1"></i>Deselect All';
+    });
+});
+</script>
+{% endblock %}
+
+{% endblock %}
