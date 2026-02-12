@@ -313,7 +313,7 @@ class WhatsAppService:
             logger.info(f"Sending WhatsApp to {whatsapp_phone} with message: {message_text}")
             
             # Send WhatsApp message
-            #result = self.send_whatsapp_template(whatsapp_phone, full_image_url, message_text)
+            result = self.send_whatsapp_template(whatsapp_phone, full_image_url, message_text)
             
             # Log the final result
             if result['success']:
