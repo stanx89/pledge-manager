@@ -29,6 +29,8 @@ MANIFEST
 
 # Django
 *.log
+pledge_manager.log
+sms_logs.log
 local_settings.py
 db.sqlite3-journal
 media/
