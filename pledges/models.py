@@ -75,6 +75,7 @@ class PledgeRecord(models.Model):
     invitation_image_url = models.URLField(blank=True, null=True, help_text="URL of the generated invitation image")
     normal_message_sent = models.BooleanField(default=False, help_text="Normal message sent status")
     whatsapp_sent = models.BooleanField(default=False, help_text="WhatsApp message sent status")
+    attended_count = models.IntegerField(default=0, help_text="Number of people who attended")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

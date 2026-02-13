@@ -20,4 +20,10 @@ urlpatterns = [
     path('send-whatsapp/<uuid:record_id>/', views.send_whatsapp, name='send_whatsapp'),
     path('send-bulk-whatsapp/', views.send_bulk_whatsapp, name='send_bulk_whatsapp'),
     path('send-background-whatsapp-all/', views.send_background_whatsapp_all, name='send_background_whatsapp_all'),
+    
+    # App verification endpoint
+    path('verify/4606c624-6679-4944-aa6a-46fa7bf8f6c2/<uuid:record_id>/', views.verify_record, name='verify_record'),
+    
+    # Attendance tracking endpoint
+    path('attend/4606c624-6679-4944-aa6a-46fa7bf8f6c2/', views.track_attendance, name='track_attendance'),
 ]

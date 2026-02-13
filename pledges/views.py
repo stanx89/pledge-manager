@@ -8,11 +8,17 @@ from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.db import transaction
+from django.db import transaction, IntegrityError
+from django.db import models
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.http import require_POST
 from django.views.generic import ListView
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+import json
+import re
+from django.http import JsonResponse
 
 from .forms import FileUploadForm, PledgeRecordForm, SMSForwardForm
 from .models import PledgeRecord, UploadLog, format_phone_number
@@ -63,14 +69,20 @@ class PledgeListView(LoginRequiredMixin, ListView):
         context['sms_status'] = self.request.GET.get('sms_status', '')
         context['whatsapp_status'] = self.request.GET.get('whatsapp_status', '')
         
-        # Add filter statistics
+        # Add filter statistics including attendance
         all_records = PledgeRecord.objects.all()
+        total_attended = all_records.aggregate(total=models.Sum('attended_count'))['total'] or 0
+        total_capacity = all_records.aggregate(total=models.Sum('card_capacity'))['total'] or 0
+        
         context['stats'] = {
             'total_records': all_records.count(),
             'sms_sent': all_records.filter(normal_message_sent=True).count(),
             'sms_not_sent': all_records.filter(normal_message_sent=False).count(),
             'whatsapp_sent': all_records.filter(whatsapp_sent=True).count(),
             'whatsapp_not_sent': all_records.filter(whatsapp_sent=False).count(),
+            'total_attended': total_attended,
+            'total_capacity': total_capacity,
+            'available_spots': total_capacity - total_attended,
         }
         
         return context
@@ -97,6 +109,12 @@ def add_record(request):
                         f"Pledge record for {record.name} created successfully with card code {record.card_code}"
                     )
                     return redirect('pledge_list')
+            except IntegrityError as e:
+                logger.error(f"Database integrity error creating record - Mobile: {form.cleaned_data.get('mobile_number')}, Error: {str(e)}")
+                if 'mobile_number' in str(e).lower():
+                    form.add_error('mobile_number', "A record with this mobile number already exists.")
+                else:
+                    messages.error(request, "This record already exists or conflicts with existing data.")
             except Exception as e:
                 logger.error(f"Error creating manual record - Form data: {form.cleaned_data}, Error: {str(e)}")
                 messages.error(request, f"Error creating record: {str(e)}")
@@ -765,3 +783,134 @@ def send_background_whatsapp_worker(records):
             logger.error(f"✗ Error sending WhatsApp to {record.name}: {str(e)}", exc_info=True)
     
     logger.info(f"Background WhatsApp batch completed: {successful_count} successful, {failed_count} failed")
+
+
+def verify_record(request, record_id):
+    """API endpoint for app verification/scanning - returns all records with essential data"""
+    try:
+        # Return all records instead of just one
+        records = PledgeRecord.objects.all().order_by('name')
+        
+        records_data = []
+        for record in records:
+            records_data.append({
+                'id': str(record.id),
+                'name': record.name,
+                'card_code': record.card_code,
+                'capacity': record.card_capacity,
+                'mobile_number': record.mobile_number
+            })
+        
+        response_data = {
+            'success': True,
+            'count': len(records_data),
+            'records': records_data
+        }
+        
+        logger.info(f"Record verification - Returned {len(records_data)} records")
+        return JsonResponse(response_data)
+        
+    except Exception as e:
+        logger.error(f"Verification error: {str(e)}")
+        return JsonResponse({
+            'success': False,
+            'error': 'Internal server error'
+        }, status=500)
+
+
+@csrf_exempt
+def track_attendance(request):
+    """API endpoint for attendance tracking - updates attended count vs capacity"""
+    if request.method != 'POST':
+        return JsonResponse({
+            'success': False,
+            'error': 'Only POST method allowed'
+        }, status=405)
+    
+    try:
+        # Parse JSON body
+        data = json.loads(request.body)
+        scanned_content = data.get('content', '').strip()
+        
+        if not scanned_content:
+            return JsonResponse({
+                'success': False,
+                'error': 'Content is required'
+            }, status=400)
+        
+        record = None
+        
+        # Check if content is the special UUID
+        if scanned_content == 'ef559bab-fe8e-4c9d-9d0a-0449c038f7ac':
+            # Use ID to get pledge record (this seems like a test/admin case)
+            # For now, we'll treat this as invalid since no specific ID provided
+            return JsonResponse({
+                'success': False,
+                'error': 'Invalid UUID format - no record ID provided'
+            }, status=400)
+            
+        # Check if content is just a card code like "F7AC"
+        elif len(scanned_content) <= 4 and scanned_content.isalnum():
+            try:
+                record = PledgeRecord.objects.get(card_code=scanned_content.upper())
+            except PledgeRecord.DoesNotExist:
+                return JsonResponse({
+                    'success': False,
+                    'error': f'Card code {scanned_content} not found'
+                }, status=404)
+                
+        # Check if content has structure "Card: XWD | Capacity: 2 double"
+        else:
+            # Parse the QR content structure
+            match = re.search(r'Card:\s*([A-Z0-9]+)', scanned_content)
+            if match:
+                card_code = match.group(1)
+                try:
+                    record = PledgeRecord.objects.get(card_code=card_code)
+                except PledgeRecord.DoesNotExist:
+                    return JsonResponse({
+                        'success': False,
+                        'error': f'Card code {card_code} not found'
+                    }, status=404)
+            else:
+                return JsonResponse({
+                    'success': False,
+                    'error': 'Invalid scan format - could not extract card code'
+                }, status=400)
+        
+        # Check if attendance would exceed capacity
+        if record.attended_count >= record.card_capacity:
+            logger.warning(f"Attendance denied - Card: {record.card_code}, Current: {record.attended_count}, Capacity: {record.card_capacity}")
+            return JsonResponse({
+                'success': False,
+                'error': 'Capacity exceeded',
+                'card_code': record.card_code,
+                'name': record.name,
+                'current_attendance': record.attended_count,
+                'capacity': record.card_capacity
+            }, status=400)
+        
+        # Update attendance
+        record.attended_count += 1
+        record.save()
+        
+        logger.info(f"Attendance tracked - Card: {record.card_code}, Name: {record.name}, Count: {record.attended_count}/{record.card_capacity}")
+        
+        return JsonResponse({
+            'success': True,
+            'message': 'Attendance recorded successfully',
+            'current_attendance': record.attended_count
+        })
+        
+    except json.JSONDecodeError:
+        return JsonResponse({
+            'success': False,
+            'error': 'Invalid JSON format'
+        }, status=400)
+        
+    except Exception as e:
+        logger.error(f"Attendance tracking error: {str(e)}")
+        return JsonResponse({
+            'success': False,
+            'error': 'Internal server error'
+        }, status=500)
