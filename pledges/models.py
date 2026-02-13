@@ -71,7 +71,7 @@ class PledgeRecord(models.Model):
     paid = models.DecimalField(max_digits=10, decimal_places=2, default=0, help_text="Amount paid")
     remaining = models.DecimalField(max_digits=10, decimal_places=2, default=0, help_text="Remaining amount")
     card_capacity = models.IntegerField(default=0, help_text="Card capacity (0, 1, or 2 based on paid amount)")
-    card_code = models.CharField(max_length=3, unique=True, blank=True, null=True, default='', help_text="Unique 3-letter card identification code")
+    card_code = models.CharField(max_length=10, unique=True, blank=True, null=True, default='', help_text="Unique card identification code")
     invitation_image_url = models.URLField(blank=True, null=True, help_text="URL of the generated invitation image")
     normal_message_sent = models.BooleanField(default=False, help_text="Normal message sent status")
     whatsapp_sent = models.BooleanField(default=False, help_text="WhatsApp message sent status")
@@ -118,13 +118,15 @@ class PledgeRecord(models.Model):
         # Automatically calculate remaining amount
         self.remaining = self.pledge - self.paid
         
-        # Calculate card capacity based on paid amount
-        if self.paid >= 100000:
-            self.card_capacity = 2
-        elif self.paid >= 50000:
-            self.card_capacity = 1
-        else:
-            self.card_capacity = 0
+        # Calculate card capacity based on paid amount (only if not manually set to special)
+        # Preserve manually set special capacities (> 2)
+        if self.card_capacity <= 2:
+            if self.paid >= 100000:
+                self.card_capacity = 2
+            elif self.paid >= 50000:
+                self.card_capacity = 1
+            else:
+                self.card_capacity = 0
         
         # Validate before saving
         self.full_clean()

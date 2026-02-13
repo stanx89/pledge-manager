@@ -840,14 +840,18 @@ def track_attendance(request):
         
         record = None
         
-        # Check if content is the special UUID
+        # Check if content is the special admin UUID
         if scanned_content == 'ef559bab-fe8e-4c9d-9d0a-0449c038f7ac':
-            # Use ID to get pledge record (this seems like a test/admin case)
-            # For now, we'll treat this as invalid since no specific ID provided
-            return JsonResponse({
-                'success': False,
-                'error': 'Invalid UUID format - no record ID provided'
-            }, status=400)
+            # This is a special admin/test UUID - check if it's an actual record ID first
+            try:
+                record = PledgeRecord.objects.get(id=scanned_content)
+            except PledgeRecord.DoesNotExist:
+                # Not a real record ID, treat as admin verification code
+                return JsonResponse({
+                    'success': False,
+                    'error': 'Admin UUID detected - use verification endpoint instead',
+                    'admin_code': True
+                }, status=400)
             
         # Check if content is just a card code like "F7AC"
         elif len(scanned_content) <= 4 and scanned_content.isalnum():
@@ -857,7 +861,7 @@ def track_attendance(request):
                 return JsonResponse({
                     'success': False,
                     'error': f'Card code {scanned_content} not found'
-                }, status=404)
+                }, status=400)
                 
         # Check if content has structure "Card: XWD | Capacity: 2 double"
         else:
@@ -871,7 +875,7 @@ def track_attendance(request):
                     return JsonResponse({
                         'success': False,
                         'error': f'Card code {card_code} not found'
-                    }, status=404)
+                    }, status=400)
             else:
                 return JsonResponse({
                     'success': False,
