@@ -13,9 +13,18 @@ class FileUploadForm(forms.Form):
 
 
 class PledgeRecordForm(forms.ModelForm):
+    mobile_number = forms.CharField(
+        max_length=15,
+        required=True,
+        widget=forms.TextInput(attrs={
+            'class': 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent',
+            'placeholder': 'Enter mobile number'
+        })
+    )
+    
     class Meta:
         model = PledgeRecord
-        fields = ['name', 'pledge', 'paid']
+        fields = ['name', 'mobile_number', 'pledge', 'paid']
         widgets = {
             'name': forms.TextInput(attrs={
                 'class': 'w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent',
@@ -32,6 +41,30 @@ class PledgeRecordForm(forms.ModelForm):
                 'placeholder': 'Enter paid amount'
             }),
         }
+        
+    def clean_mobile_number(self):
+        mobile_number = self.cleaned_data.get('mobile_number')
+        if not mobile_number or mobile_number.strip() == '':
+            raise forms.ValidationError("Mobile number is required")
+        
+        # Format and validate phone number
+        try:
+            formatted_number = format_phone_number(mobile_number.strip())
+            validate_phone_number(formatted_number)
+            
+            # Check for uniqueness (exclude current instance if editing)
+            queryset = PledgeRecord.objects.filter(mobile_number=formatted_number)
+            if self.instance and self.instance.pk:
+                queryset = queryset.exclude(pk=self.instance.pk)
+            
+            if queryset.exists():
+                raise forms.ValidationError("A record with this mobile number already exists")
+                
+            return formatted_number
+        except ValidationError as e:
+            raise forms.ValidationError(f"Invalid phone number: {str(e)}")
+        except Exception as e:
+            raise forms.ValidationError(f"Error processing phone number: {str(e)}")
 
 
 class SMSForwardForm(forms.Form):

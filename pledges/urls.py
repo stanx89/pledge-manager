@@ -4,6 +4,7 @@ from . import views
 urlpatterns = [
     path('', views.PledgeListView.as_view(), name='pledge_list'),
     path('upload/', views.upload_file, name='upload_file'),
+    path('add/', views.add_record, name='add_record'),
     path('view/<uuid:record_id>/', views.view_pledge_detail, name='view_pledge_detail'),
     path('edit/<uuid:record_id>/', views.edit_record, name='edit_record'),
     path('delete/<uuid:record_id>/', views.delete_record, name='delete_record'),

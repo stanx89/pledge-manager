@@ -65,7 +65,7 @@ def validate_phone_number(phone_number):
 
 class PledgeRecord(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    mobile_number = models.CharField(max_length=15, unique=True, help_text="Mobile number (Unique)")
+    mobile_number = models.CharField(max_length=15, unique=True, blank=False, help_text="Mobile number (Unique)")
     name = models.CharField(max_length=255, help_text="Person's name")
     pledge = models.DecimalField(max_digits=10, decimal_places=2, default=0, help_text="Pledged amount")
     paid = models.DecimalField(max_digits=10, decimal_places=2, default=0, help_text="Amount paid")

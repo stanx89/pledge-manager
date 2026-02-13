@@ -1,0 +1,106 @@
+{% extends 'pledges/base.html' %}
+
+{% block title %}Add New Pledge Record{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    <div class="max-w-2xl mx-auto">
+        <div class="bg-white shadow-md rounded-lg p-6">
+            <div class="flex justify-between items-center mb-6">
+                <h1 class="text-2xl font-bold text-gray-800">Add New Pledge Record</h1>
+                <a href="{% url 'pledge_list' %}" class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded text-sm">
+                    Back to List
+                </a>
+            </div>
+
+            <form method="post" class="space-y-6">
+                {% csrf_token %}
+                
+                <div>
+                    <label for="{{ form.name.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
+                        Name <span class="text-red-500">*</span>
+                    </label>
+                    {{ form.name }}
+                    {% if form.name.errors %}
+                        <div class="text-red-600 text-sm mt-1">
+                            {% for error in form.name.errors %}
+                                <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div>
+                    <label for="{{ form.mobile_number.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
+                        Mobile Number <span class="text-red-500">*</span>
+                    </label>
+                    {{ form.mobile_number }}
+                    {% if form.mobile_number.errors %}
+                        <div class="text-red-600 text-sm mt-1">
+                            {% for error in form.mobile_number.errors %}
+                                <p>{{ error }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label for="{{ form.pledge.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
+                            Pledge Amount
+                        </label>
+                        {{ form.pledge }}
+                        {% if form.pledge.errors %}
+                            <div class="text-red-600 text-sm mt-1">
+                                {% for error in form.pledge.errors %}
+                                    <p>{{ error }}</p>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <div>
+                        <label for="{{ form.paid.id_for_label }}" class="block text-sm font-medium text-gray-700 mb-2">
+                            Paid Amount
+                        </label>
+                        {{ form.paid }}
+                        {% if form.paid.errors %}
+                            <div class="text-red-600 text-sm mt-1">
+                                {% for error in form.paid.errors %}
+                                    <p>{{ error }}</p>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="flex space-x-4">
+                    <button type="submit" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded font-medium">
+                        Create Record
+                    </button>
+                    <a href="{% url 'pledge_list' %}" class="bg-gray-300 hover:bg-gray-400 text-gray-700 px-6 py-2 rounded font-medium">
+                        Cancel
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* Style the form inputs */
+    input[type="text"], input[type="number"] {
+        width: 100%;
+        padding: 0.5rem;
+        border: 1px solid #d1d5db;
+        border-radius: 0.375rem;
+        font-size: 0.875rem;
+    }
+    
+    input[type="text"]:focus, input[type="number"]:focus {
+        outline: none;
+        border-color: #3b82f6;
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    }
+</style>
+{% endblock %}
