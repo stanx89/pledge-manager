@@ -942,7 +942,7 @@ def manual_attendance(request):
             return JsonResponse({
                 'success': False,
                 'error': f'Card code {card_code} not found'
-            }, status=404)
+            }, status=400)
         
         # Check if attendance would exceed capacity
         if record.attended_count >= record.card_capacity:
