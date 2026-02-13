@@ -404,10 +404,6 @@ function toggleDropdown(event, pledgeId) {
                     Send WhatsApp
                 </button>
             </form>
-            <button type="button" data-action="whatsapp-forward" data-record-id="${recordId}" data-record-name="${recordName}" class="flex items-center w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-green-50 hover:text-green-700 transition-colors">
-                <i class="fab fa-whatsapp mr-3 text-green-500"></i>
-                WhatsApp to Another Number
-            </button>
             <div class="border-t border-gray-100"></div>
             <form method="post" action="/delete/${recordId}/" onsubmit="return confirm('Are you sure you want to delete the record for ${recordName}? This action cannot be undone.');" style="display: contents;">
                 <input type="hidden" name="csrfmiddlewaretoken" value="${document.querySelector('[name=csrfmiddlewaretoken]').value}">
@@ -422,16 +418,6 @@ function toggleDropdown(event, pledgeId) {
     // Add to document body
     document.body.appendChild(dropdown);
     currentDropdown = dropdown;
-    
-    // Attach event listener to WhatsApp forward button
-    const whatsappForwardBtn = dropdown.querySelector('[data-action="whatsapp-forward"]');
-    if (whatsappForwardBtn) {
-        whatsappForwardBtn.addEventListener('click', function() {
-            const recordId = this.dataset.recordId;
-            const recordName = this.dataset.recordName;
-            openWhatsAppForwardModal(recordId, recordName);
-        });
-    }
     
     // Add animation
     dropdown.style.opacity = '0';
