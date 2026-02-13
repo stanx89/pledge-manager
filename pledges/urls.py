@@ -14,7 +14,8 @@ urlpatterns = [
     path('sms-form/', views.sms_form, name='sms_form'),
     path('forward-sms/<uuid:record_id>/', views.forward_sms, name='forward_sms'),
     path('forward-sms-modal/<uuid:record_id>/', views.forward_sms_modal, name='forward_sms_modal'),
-    path('forward-whatsapp-modal/<uuid:record_id>/', views.forward_whatsapp_modal, name='forward_whatsapp_modal'),    path('send-background-sms-all/', views.send_background_sms_all, name='send_background_sms_all'),
+    path('forward-whatsapp-modal/<uuid:record_id>/', views.forward_whatsapp_modal, name='forward_whatsapp_modal'),
+    path('send-background-sms-all/', views.send_background_sms_all, name='send_background_sms_all'),
     
     # WhatsApp URLs
     path('send-whatsapp/<uuid:record_id>/', views.send_whatsapp, name='send_whatsapp'),
@@ -26,4 +27,7 @@ urlpatterns = [
     
     # Attendance tracking endpoint
     path('attend/4606c624-6679-4944-aa6a-46fa7bf8f6c2/', views.track_attendance, name='track_attendance'),
+    
+    # Manual attendance entry endpoint
+    path('manual/4606c624-6679-4944-aa6a-46fa7bf8f6c2/', views.manual_attendance, name='manual_attendance'),
 ]

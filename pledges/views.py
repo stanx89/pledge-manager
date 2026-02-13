@@ -914,3 +914,72 @@ def track_attendance(request):
             'success': False,
             'error': 'Internal server error'
         }, status=500)
+
+@csrf_exempt
+def manual_attendance(request):
+    """API endpoint for manual attendance entry - takes only card code"""
+    if request.method != 'POST':
+        return JsonResponse({
+            'success': False,
+            'error': 'Only POST method allowed'
+        }, status=405)
+    
+    try:
+        # Parse JSON body
+        data = json.loads(request.body)
+        card_code = data.get('content', '').strip().upper()
+        
+        if not card_code:
+            return JsonResponse({
+                'success': False,
+                'error': 'Card code is required'
+            }, status=400)
+        
+        # Find record by card code
+        try:
+            record = PledgeRecord.objects.get(card_code=card_code)
+        except PledgeRecord.DoesNotExist:
+            return JsonResponse({
+                'success': False,
+                'error': f'Card code {card_code} not found'
+            }, status=404)
+        
+        # Check if attendance would exceed capacity
+        if record.attended_count >= record.card_capacity:
+            logger.warning(f"Manual attendance denied - Card: {record.card_code}, Current: {record.attended_count}, Capacity: {record.card_capacity}")
+            return JsonResponse({
+                'success': False,
+                'error': 'Capacity exceeded',
+                'card_code': record.card_code,
+                'name': record.name,
+                'current_attendance': record.attended_count,
+                'capacity': record.card_capacity
+            }, status=400)
+        
+        # Update attendance
+        record.attended_count += 1
+        record.save()
+        
+        logger.info(f"Manual attendance tracked - Card: {record.card_code}, Name: {record.name}, Count: {record.attended_count}/{record.card_capacity}")
+        
+        return JsonResponse({
+            'success': True,
+            'message': 'Attendance recorded successfully',
+            'card_code': record.card_code,
+            'name': record.name,
+            'current_attendance': record.attended_count,
+            'capacity': record.card_capacity
+        })
+        
+    except json.JSONDecodeError:
+        return JsonResponse({
+            'success': False,
+            'error': 'Invalid JSON format'
+        }, status=400)
+        
+    except Exception as e:
+        logger.error(f"Manual attendance error: {str(e)}")
+        return JsonResponse({
+            'success': False,
+            'error': 'Internal server error'
+        }, status=500)
