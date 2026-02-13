@@ -32,7 +32,10 @@ class PledgeListView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         queryset = super().get_queryset()
         search_query = self.request.GET.get('search', '').strip()
+        sms_status = self.request.GET.get('sms_status', '')
+        whatsapp_status = self.request.GET.get('whatsapp_status', '')
         
+        # Search filter
         if search_query:
             queryset = queryset.filter(
                 name__icontains=search_query
@@ -40,11 +43,36 @@ class PledgeListView(LoginRequiredMixin, ListView):
                 mobile_number__icontains=search_query
             )
         
+        # SMS status filter
+        if sms_status == 'sent':
+            queryset = queryset.filter(normal_message_sent=True)
+        elif sms_status == 'not_sent':
+            queryset = queryset.filter(normal_message_sent=False)
+            
+        # WhatsApp status filter
+        if whatsapp_status == 'sent':
+            queryset = queryset.filter(whatsapp_sent=True)
+        elif whatsapp_status == 'not_sent':
+            queryset = queryset.filter(whatsapp_sent=False)
+        
         return queryset
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['search'] = self.request.GET.get('search', '')
+        context['sms_status'] = self.request.GET.get('sms_status', '')
+        context['whatsapp_status'] = self.request.GET.get('whatsapp_status', '')
+        
+        # Add filter statistics
+        all_records = PledgeRecord.objects.all()
+        context['stats'] = {
+            'total_records': all_records.count(),
+            'sms_sent': all_records.filter(normal_message_sent=True).count(),
+            'sms_not_sent': all_records.filter(normal_message_sent=False).count(),
+            'whatsapp_sent': all_records.filter(whatsapp_sent=True).count(),
+            'whatsapp_not_sent': all_records.filter(whatsapp_sent=False).count(),
+        }
+        
         return context
 
 

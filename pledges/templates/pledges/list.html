@@ -20,57 +20,99 @@
                     Search: "{{ search }}"
                 </span>
                 {% endif %}
+                {% if sms_status %}
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-sm font-medium bg-purple-100 text-purple-800">
+                    <i class="fas fa-sms mr-1"></i>
+                    SMS: {{ sms_status|title }}
+                </span>
+                {% endif %}
+                {% if whatsapp_status %}
+                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-sm font-medium bg-green-100 text-green-800">
+                    <i class="fab fa-whatsapp mr-1"></i>
+                    WhatsApp: {{ whatsapp_status|title }}
+                </span>
+                {% endif %}
             </div>
         </div>
-        <div class="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-3">
-            <!-- Search Form -->
-            <form method="get" class="flex">
+        
+        <!-- Filter Section -->
+        <div class="bg-gray-50 rounded-lg p-4 mb-4">
+            <form method="get" class="flex flex-wrap items-center gap-4">
+                <!-- Search Input -->
                 <div class="relative">
                     <input type="text" 
                            name="search" 
                            value="{{ search }}" 
-                           placeholder="Search by name or mobile number..."
-                           class="w-full md:w-80 pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                           placeholder="Search by name or mobile..."
+                           class="w-64 pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent">
                     <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                         <i class="fas fa-search text-gray-400"></i>
                     </div>
                 </div>
-                <button type="submit" class="ml-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors">
-                    <i class="fas fa-search"></i>
-                </button>
-                {% if search %}
-                <a href="{% url 'pledge_list' %}" class="ml-2 px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600 transition-colors" title="Clear search">
-                    <i class="fas fa-times"></i>
-                </a>
-                {% endif %}
+                
+                <!-- SMS Status Filter -->
+                <div class="flex items-center space-x-2">
+                    <label class="text-sm font-medium text-gray-700">SMS:</label>
+                    <select name="sms_status" class="border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        <option value="">All ({{ stats.total_records }})</option>
+                        <option value="sent" {% if sms_status == 'sent' %}selected{% endif %}>Sent ({{ stats.sms_sent }})</option>
+                        <option value="not_sent" {% if sms_status == 'not_sent' %}selected{% endif %}>Not Sent ({{ stats.sms_not_sent }})</option>
+                    </select>
+                </div>
+                
+                <!-- WhatsApp Status Filter -->
+                <div class="flex items-center space-x-2">
+                    <label class="text-sm font-medium text-gray-700">WhatsApp:</label>
+                    <select name="whatsapp_status" class="border border-gray-300 rounded-md px-3 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        <option value="">All ({{ stats.total_records }})</option>
+                        <option value="sent" {% if whatsapp_status == 'sent' %}selected{% endif %}>Sent ({{ stats.whatsapp_sent }})</option>
+                        <option value="not_sent" {% if whatsapp_status == 'not_sent' %}selected{% endif %}>Not Sent ({{ stats.whatsapp_not_sent }})</option>
+                    </select>
+                </div>
+                
+                <!-- Filter Buttons -->
+                <div class="flex space-x-2">
+                    <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors">
+                        <i class="fas fa-filter mr-2"></i>Apply Filters
+                    </button>
+                    <a href="{% url 'pledge_list' %}" class="px-4 py-2 bg-gray-500 text-white rounded-md hover:bg-gray-600 transition-colors">
+                        <i class="fas fa-times mr-2"></i>Clear All
+                    </a>
+                </div>
             </form>
-            <!-- SMS All Button -->
-            <form method="post" action="{% url 'send_background_sms_all' %}" class="inline-flex">
-                {% csrf_token %}
-                <button type="submit" class="inline-flex items-center px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 transition-colors" onclick="return confirm('Send SMS to all unsent records? This will run in the background.')">
-                    <i class="fas fa-paper-plane mr-2"></i>
-                    SMS All Unsent
-                </button>
-            </form>
-            <!-- WhatsApp All Button -->
-            <form method="post" action="{% url 'send_background_whatsapp_all' %}" class="inline-flex">
-                {% csrf_token %}
-                <button type="submit" class="inline-flex items-center px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors" onclick="return confirm('Send WhatsApp invitations to all unsent records? This will run in the background.')">
-                    <i class="fab fa-whatsapp mr-2"></i>
-                    WhatsApp All Unsent
-                </button>
-            </form>
-            <!-- Upload Button -->
-            <a href="{% url 'upload_file' %}" class="inline-flex items-center px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors">
-                <i class="fas fa-upload mr-2"></i>
-                Upload File
-            </a>
-            <!-- Add Record Button -->
-            <a href="{% url 'add_record' %}" class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors">
-                <i class="fas fa-plus mr-2"></i>
-                Add Record
-            </a>
         </div>
+    </div>
+</div>
+
+<!-- Actions Section - Separate Card -->
+<div class="bg-white rounded-lg shadow-sm border border-gray-200 p-4 mb-6">
+    <div class="flex flex-col sm:flex-row flex-wrap gap-3">
+        <!-- SMS All Button -->
+        <form method="post" action="{% url 'send_background_sms_all' %}" class="inline-flex">
+            {% csrf_token %}
+            <button type="submit" class="inline-flex items-center px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 transition-colors" onclick="return confirm('Send SMS to all unsent records? This will run in the background.')">
+                <i class="fas fa-paper-plane mr-2"></i>
+                SMS All Unsent
+            </button>
+        </form>
+        <!-- WhatsApp All Button -->
+        <form method="post" action="{% url 'send_background_whatsapp_all' %}" class="inline-flex">
+            {% csrf_token %}
+            <button type="submit" class="inline-flex items-center px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors" onclick="return confirm('Send WhatsApp invitations to all unsent records? This will run in the background.')">
+                <i class="fab fa-whatsapp mr-2"></i>
+                WhatsApp All Unsent
+            </button>
+        </form>
+        <!-- Upload Button -->
+        <a href="{% url 'upload_file' %}" class="inline-flex items-center px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700 transition-colors">
+            <i class="fas fa-upload mr-2"></i>
+            Upload File
+        </a>
+        <!-- Add Record Button -->
+        <a href="{% url 'add_record' %}" class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors">
+            <i class="fas fa-plus mr-2"></i>
+            Add Record
+        </a>
     </div>
 </div>
 
