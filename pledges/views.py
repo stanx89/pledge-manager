@@ -557,6 +557,65 @@ def send_background_sms_all(request):
 # WhatsApp Functions
 @login_required
 @require_POST
+@login_required
+@require_POST
+def forward_whatsapp_modal(request, record_id):
+    """Forward WhatsApp invitation to a different number"""
+    record = get_object_or_404(PledgeRecord, id=record_id)
+    
+    if request.method == 'POST':
+        recipient_number = request.POST.get('recipient_number', '').strip()
+        
+        if not recipient_number:
+            messages.error(request, "Phone number is required")
+            return redirect('view_pledge_detail', record_id=record.id)
+        
+        try:
+            # Format the phone number
+            from .models import format_phone_number
+            formatted_number = format_phone_number(recipient_number)
+            
+            if not formatted_number:
+                messages.error(request, "Invalid phone number format")
+                return redirect('view_pledge_detail', record_id=record.id)
+            
+            # Create a temporary record object with the new number (not a database model)
+            class TempRecord:
+                def __init__(self, original_record, new_mobile):
+                    self.id = original_record.id
+                    self.name = original_record.name
+                    self.mobile_number = new_mobile
+                    self.card_code = original_record.card_code
+                    self.card_capacity = original_record.card_capacity
+                    self.pledge = original_record.pledge
+                    self.paid = original_record.paid
+                    self.invitation_image_url = original_record.invitation_image_url
+                
+                def save(self):
+                    # Do nothing - this is a temporary record for forwarding only
+                    pass
+            
+            temp_record = TempRecord(record, formatted_number)
+            
+            whatsapp_service = WhatsAppService()
+            result = whatsapp_service.send_invitation_whatsapp(temp_record)
+            
+            if result['success']:
+                messages.success(request, f"WhatsApp invitation forwarded successfully to {formatted_number}")
+                
+                # Log the forward action
+                logger.info(f"WhatsApp forwarded - Record: {record.name} ({record.id}) → {formatted_number}")
+            else:
+                messages.error(request, f"Failed to forward WhatsApp: {result['error']}")
+                
+        except Exception as e:
+            logger.error(f"Error forwarding WhatsApp for record {record.id}: {str(e)}")
+            messages.error(request, f"Error forwarding WhatsApp: {str(e)}")
+    
+    return redirect('view_pledge_detail', record_id=record.id)
+
+
+@login_required
 def send_whatsapp(request, record_id):
     """Send WhatsApp invitation to a specific pledge record"""
     record = get_object_or_404(PledgeRecord, id=record_id)

@@ -143,11 +143,7 @@ class WhatsAppService:
         return None
         
     def generate_invitation_image(self, pledge_record):
-        """Generate invitation image using the create_image script"""
-        if pledge_record.invitation_image_url:
-            # Image already exists, return the URL
-            return pledge_record.invitation_image_url
-            
+        """Generate invitation image using the create_image script - always regenerate to replace existing"""
         try:
             # Path to template image
             template_path = Path(settings.BASE_DIR) / 'static' / 'invitations' / 'template.png'
@@ -165,6 +161,10 @@ class WhatsAppService:
             image_filename = f"invite_{safe_name}_{pledge_record.card_code}.png"
             image_path = invitations_dir / image_filename
             
+            # If image already exists, log that we're replacing it
+            if image_path.exists():
+                logger.info(f"Replacing existing invitation image for {pledge_record.name}: {image_path}")
+            
             # Generate image using the create_image functions
             base_image = Image.open(template_path).convert("RGB")
             
@@ -176,7 +176,7 @@ class WhatsAppService:
             qr_data = f"Card: {pledge_record.card_code} | Capacity: {pledge_record.card_capacity} {capacity_text}"
             final_image = add_qr(image_with_name, qr_data, capacity_text)
             
-            # Save the image
+            # Save the image (overwriting if it exists)
             final_image.save(str(image_path), quality=95)
             
             # Generate full URL using configurable BASE_URL

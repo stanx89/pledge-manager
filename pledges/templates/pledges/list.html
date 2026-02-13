@@ -270,6 +270,54 @@
 <!-- Dropdown Container -->
 <div id="dropdown-container"></div>
 
+<!-- WhatsApp Forward Modal -->
+<div id="whatsappForwardModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full hidden">
+    <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white">
+        <div class="mt-3">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="text-lg font-medium text-gray-900">Send WhatsApp to Another Number</h3>
+                <button onclick="closeWhatsAppForwardModal()" class="text-gray-400 hover:text-gray-600">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div id="whatsappRecordInfo" class="mb-4 p-3 bg-green-50 border border-green-200 rounded-lg">
+                <div class="text-sm text-green-800">
+                    <i class="fab fa-whatsapp mr-2"></i>
+                    <strong id="whatsappRecordName"></strong><br>
+                    Invitation will be sent to a different WhatsApp number
+                </div>
+            </div>
+            
+            <form id="whatsappForwardForm" method="post">
+                <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+                <div class="mb-4">
+                    <label for="whatsapp_forward_number" class="block text-sm font-medium text-gray-700 mb-2">
+                        WhatsApp Number *
+                    </label>
+                    <input type="tel" 
+                           id="whatsapp_forward_number" 
+                           name="recipient_number" 
+                           required
+                           placeholder="e.g., 0712345678"
+                           class="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:border-transparent">
+                    <p class="text-xs text-gray-500 mt-1">The invitation image will be sent to this WhatsApp number</p>
+                </div>
+                
+                <div class="flex justify-end space-x-3">
+                    <button type="button" onclick="closeWhatsAppForwardModal()" class="px-4 py-2 border border-gray-300 text-gray-700 rounded-md hover:bg-gray-50">
+                        Cancel
+                    </button>
+                    <button type="submit" class="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700">
+                        <i class="fab fa-whatsapp mr-2"></i>
+                        Send WhatsApp
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 {% else %}
 <!-- Empty State -->
 <div class="text-center py-12">
@@ -356,6 +404,10 @@ function toggleDropdown(event, pledgeId) {
                     Send WhatsApp
                 </button>
             </form>
+            <button type="button" data-action="whatsapp-forward" data-record-id="${recordId}" data-record-name="${recordName}" class="flex items-center w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-green-50 hover:text-green-700 transition-colors">
+                <i class="fab fa-whatsapp mr-3 text-green-500"></i>
+                WhatsApp to Another Number
+            </button>
             <div class="border-t border-gray-100"></div>
             <form method="post" action="/delete/${recordId}/" onsubmit="return confirm('Are you sure you want to delete the record for ${recordName}? This action cannot be undone.');" style="display: contents;">
                 <input type="hidden" name="csrfmiddlewaretoken" value="${document.querySelector('[name=csrfmiddlewaretoken]').value}">
@@ -371,6 +423,16 @@ function toggleDropdown(event, pledgeId) {
     document.body.appendChild(dropdown);
     currentDropdown = dropdown;
     
+    // Attach event listener to WhatsApp forward button
+    const whatsappForwardBtn = dropdown.querySelector('[data-action="whatsapp-forward"]');
+    if (whatsappForwardBtn) {
+        whatsappForwardBtn.addEventListener('click', function() {
+            const recordId = this.dataset.recordId;
+            const recordName = this.dataset.recordName;
+            openWhatsAppForwardModal(recordId, recordName);
+        });
+    }
+    
     // Add animation
     dropdown.style.opacity = '0';
     dropdown.style.transform = 'scale(0.95)';
@@ -380,7 +442,46 @@ function toggleDropdown(event, pledgeId) {
         dropdown.style.transform = 'scale(1)';
     }, 1);
 }
+function openWhatsAppForwardModal(recordId, recordName) {
+    // Close any existing dropdown
+    if (currentDropdown) {
+        currentDropdown.remove();
+        currentDropdown = null;
+    }
+    
+    // Debug: Check if elements exist
+    const nameElement = document.getElementById('whatsappRecordName');
+    const formElement = document.getElementById('whatsappForwardForm');
+    const modalElement = document.getElementById('whatsappForwardModal');
+    
+    if (!nameElement || !formElement || !modalElement) {
+        console.error('WhatsApp forward modal elements not found:', {
+            nameElement: !!nameElement,
+            formElement: !!formElement,
+            modalElement: !!modalElement
+        });
+        alert('Modal not properly loaded. Please refresh the page.');
+        return;
+    }
+    
+    // Set up the modal
+    nameElement.textContent = recordName;
+    formElement.action = `/forward-whatsapp-modal/${recordId}/`;
+    modalElement.classList.remove('hidden');
+    
+    // Focus on the phone number input
+    setTimeout(() => {
+        const phoneInput = document.getElementById('whatsapp_forward_number');
+        if (phoneInput) {
+            phoneInput.focus();
+        }
+    }, 100);
+}
 
+function closeWhatsAppForwardModal() {
+    document.getElementById('whatsappForwardModal').classList.add('hidden');
+    document.getElementById('whatsappForwardForm').reset();
+}
 // Close dropdown when clicking outside
 document.addEventListener('click', function(event) {
     if (currentDropdown && !currentDropdown.contains(event.target)) {
@@ -392,6 +493,15 @@ document.addEventListener('click', function(event) {
                 currentDropdown = null;
             }
         }, 100);
+    }
+    
+    // Close WhatsApp forward modal if clicking outside
+    const whatsappModal = document.getElementById('whatsappForwardModal');
+    if (whatsappModal && !whatsappModal.classList.contains('hidden')) {
+        const modalContent = whatsappModal.querySelector('.relative');
+        if (!modalContent.contains(event.target)) {
+            closeWhatsAppForwardModal();
+        }
     }
 });
 

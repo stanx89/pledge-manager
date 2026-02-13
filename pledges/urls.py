@@ -14,7 +14,7 @@ urlpatterns = [
     path('sms-form/', views.sms_form, name='sms_form'),
     path('forward-sms/<uuid:record_id>/', views.forward_sms, name='forward_sms'),
     path('forward-sms-modal/<uuid:record_id>/', views.forward_sms_modal, name='forward_sms_modal'),
-    path('send-background-sms-all/', views.send_background_sms_all, name='send_background_sms_all'),
+    path('forward-whatsapp-modal/<uuid:record_id>/', views.forward_whatsapp_modal, name='forward_whatsapp_modal'),    path('send-background-sms-all/', views.send_background_sms_all, name='send_background_sms_all'),
     
     # WhatsApp URLs
     path('send-whatsapp/<uuid:record_id>/', views.send_whatsapp, name='send_whatsapp'),
