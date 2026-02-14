@@ -798,6 +798,7 @@ def verify_record(request, record_id):
                 'name': record.name,
                 'card_code': record.card_code,
                 'capacity': record.card_capacity,
+                'attended_count': record.attended_count,
                 'mobile_number': record.mobile_number
             })
         
