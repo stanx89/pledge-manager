@@ -30,4 +30,10 @@ urlpatterns = [
     
     # Manual attendance entry endpoint
     path('manual/4606c624-6679-4944-aa6a-46fa7bf8f6c2/', views.manual_attendance, name='manual_attendance'),
+    
+    # Reset all attendance counts endpoint
+    path('reset/4606c624-6679-4944-aa6a-46fa7bf8f6c2/', views.reset_attendance, name='reset_attendance'),
+    
+    # Reset all attendance counts endpoint
+    path('reset/4606c624-6679-4944-aa6a-46fa7bf8f6c2/', views.reset_attendance, name='reset_attendance'),
 ]

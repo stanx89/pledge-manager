@@ -987,3 +987,32 @@ def manual_attendance(request):
             'success': False,
             'error': 'Internal server error'
         }, status=500)
+
+
+@csrf_exempt
+def reset_attendance(request):
+    """API endpoint to reset all attendance counts to 0"""
+    if request.method != 'GET':
+        return JsonResponse({
+            'success': False,
+            'error': 'Only GET method allowed'
+        }, status=405)
+    
+    try:
+        # Reset all attended_count to 0
+        updated_count = PledgeRecord.objects.update(attended_count=0)
+        
+        logger.info(f"Attendance reset completed - {updated_count} records updated")
+        
+        return JsonResponse({
+            'success': True,
+            'message': 'All attendance counts reset to 0',
+            'updated_records': updated_count
+        })
+        
+    except Exception as e:
+        logger.error(f"Attendance reset error: {str(e)}")
+        return JsonResponse({
+            'success': False,
+            'error': 'Internal server error'
+        }, status=500)
